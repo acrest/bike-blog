@@ -1,0 +1,16 @@
+.nav-bar {
+	height: 100px;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	background-image: url('/assets/images/whole-enchilada.jpeg');
+	.left-side {
+		margin: auto;
+	}
+	.right-side {
+		margin: auto;
+	}
+	.middle {
+		margin: auto;
+	}
+}
