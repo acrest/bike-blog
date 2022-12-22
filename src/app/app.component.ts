@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'bike-blog';
+
+  public currentYear: number;
+  public constructor() {
+	this.currentYear = (new Date()).getFullYear();
+  }
 }

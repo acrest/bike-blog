@@ -5,16 +5,36 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { BlogComponent } from './pages/blog/blog.component';
+import { DealsComponent } from './pages/deals/deals.component';
+
+import { environment } from 'src/environments/environment';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AuthModule } from '@angular/fire/auth';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { UploadComponent } from './components/upload/upload.component';
+import { UploadDetailsComponent } from './components/upload-details/upload-details.component';
+import { CreatePostComponent } from './pages/create-post/create-post.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    NavBarComponent
+    NavBarComponent,
+    BlogComponent,
+    DealsComponent,
+    UploadComponent,
+    UploadDetailsComponent,
+    CreatePostComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+	AngularFireModule.initializeApp(environment.firebaseConfig),
+	AngularFireStorageModule,
+	AuthModule,
+	AngularFireDatabaseModule
   ],
   providers: [],
   bootstrap: [AppComponent]
