@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BlogPost, PostService } from 'src/app/services/post.service';
+import { BlogPhoto, BlogPost, PostService } from 'src/app/services/post.service';
 
 @Component({
   selector: 'app-blog',
@@ -9,12 +9,20 @@ import { BlogPost, PostService } from 'src/app/services/post.service';
 export class BlogComponent implements OnInit {
 
   constructor(private postService: PostService) { }
+  
+  public posts: BlogPost[];
+  public blogPhotos: BlogPhoto[] = [];
 
   ngOnInit(): void {
 
 	this.postService.getBlogPost().subscribe((posts: BlogPost[]) => {
-		console.log("posts", posts);
+		this.posts = posts;
+		this.posts.forEach((post: BlogPost) => {
+			this.blogPhotos.push(JSON.parse(post.images[0]))
+		})
       })
   }
+
+
 
 }

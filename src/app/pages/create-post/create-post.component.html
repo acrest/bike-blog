@@ -1,1 +1,23 @@
-<button (click)="createPost()"></button>
+
+<div>
+	Title
+</div>
+<input type="text" [(ngModel)]="title">
+<div>
+	Sub-Title
+</div>
+<input type="text" [(ngModel)]="subTitle">
+<div>
+	Content
+</div>
+<input type="text" [(ngModel)]="content">
+
+<div>Photos</div>
+<div *ngFor="let photo of blogPhotos">
+	{{photo.id}} : {{photo.title}}
+</div>
+
+
+<button (click)="createPost()">Create Post</button>
+<button (click)="uploadPhoto()">Upload Photo</button>
+<app-upload *ngIf="isUploadingPhoto" [folderName]="'posts'" (newPhotoAdded)="newPhotoAdded($event)"></app-upload>

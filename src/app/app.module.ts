@@ -14,8 +14,9 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AuthModule } from '@angular/fire/auth';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { UploadComponent } from './components/upload/upload.component';
-import { UploadDetailsComponent } from './components/upload-details/upload-details.component';
 import { CreatePostComponent } from './pages/create-post/create-post.component';
+import { LoadingComponent } from './components/loading/loading.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,8 +26,8 @@ import { CreatePostComponent } from './pages/create-post/create-post.component';
     BlogComponent,
     DealsComponent,
     UploadComponent,
-    UploadDetailsComponent,
-    CreatePostComponent
+    CreatePostComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +35,8 @@ import { CreatePostComponent } from './pages/create-post/create-post.component';
 	AngularFireModule.initializeApp(environment.firebaseConfig),
 	AngularFireStorageModule,
 	AuthModule,
-	AngularFireDatabaseModule
+	AngularFireDatabaseModule,
+	FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

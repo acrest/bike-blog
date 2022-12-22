@@ -1,0 +1,19 @@
+.loading-component {
+    width: 100%;
+    height: 100%;
+    .content {
+        margin-top: 200px;
+        display: flex;
+        height: 300px;
+        justify-content: center;
+        align-items: center;
+        .spinner {
+    
+        }
+        .text {
+            color: white;
+            font-size: 30px;
+            margin-left: 10px;
+        }
+    }
+}

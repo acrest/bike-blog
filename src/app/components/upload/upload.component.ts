@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FileService, FileUpload } from 'src/app/services/file.service';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { AngularFireStorage } from '@angular/fire/compat/storage'
+import { UploadTaskSnapshot } from '@angular/fire/compat/storage/interfaces'
+import { BlogPhoto } from 'src/app/services/post.service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-upload',
@@ -7,35 +10,37 @@ import { FileService, FileUpload } from 'src/app/services/file.service';
   styleUrls: ['./upload.component.scss']
 })
 export class UploadComponent implements OnInit {
-	selectedFiles?: FileList;
-	currentFileUpload?: FileUpload;
-	percentage = 0;
 
-  constructor(private fileService: FileService) { }
+	@Output()
+	public newPhotoAdded: EventEmitter<BlogPhoto> = new EventEmitter();
+  
+	@Input()
+	public folderName: string;
+  
+	public filename: string;
+	public file: File;
+	public uploading: boolean = false;
 
-  ngOnInit(): void {
-  }
-
-  selectFile(event: any): void {
-    this.selectedFiles = event.target.files;
-  }
-
-  upload(): void {
-    if (this.selectedFiles) {
-      const file: File | null = this.selectedFiles.item(0);
-      this.selectedFiles = undefined;
-
-      if (file) {
-        this.currentFileUpload = new FileUpload(file);
-        this.fileService.pushFileToStorage(this.currentFileUpload).subscribe(
-          percentage => {
-            this.percentage = Math.round(percentage ? percentage : 0);
-          },
-          error => {
-            console.log(error);
-          }
-        );
-      }
-    }
-  }
+	public title: string;
+	public description: string;
+  
+	constructor(private afStorage: AngularFireStorage) { }
+  
+	ngOnInit(): void {
+	}
+  
+	public upload($event: any): void {
+	  this.file = $event.target.files[0];
+	  this.filename = this.file.name.split(".")[0] + Math.random();
+	}
+  
+	public uploadImage(): void {
+	  this.uploading = true;
+	  this.afStorage.upload("/files/" + this.folderName + this.filename, this.file).then((testObject: UploadTaskSnapshot) => {
+		testObject.ref.getDownloadURL().then((photoUrl: string) => {
+		  this.uploading = false;
+		  this.newPhotoAdded.emit(new BlogPhoto(uuidv4(), this.title, this.description, photoUrl))
+		})
+	  })
+	}
 }

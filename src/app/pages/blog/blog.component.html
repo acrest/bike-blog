@@ -1,1 +1,13 @@
-<p>blog works!</p>
+<div class="blog-main">
+	<div class="post" *ngFor="let post of posts; let i=index">
+		<div>
+			<div>
+				<h1>{{post.title}}</h1>
+			</div>
+			<div>
+				<h4>{{post.subTitle}}</h4>
+			</div>
+		</div>
+		<img *ngIf="blogPhotos[i]" src="{{blogPhotos[i]?.url}}">
+	</div>
+</div>

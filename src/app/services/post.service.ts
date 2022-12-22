@@ -6,12 +6,12 @@ import { map } from 'rxjs/operators';
 export class BlogPost {
 	id: string;
 	title: string;
-	date: string;
+	date: number;
 	images: string[];
 	subTitle: string;
 	content: string;
 
-	constructor(id: string, title: string, date: string, images: string[], subTitle: string, content: string) {
+	constructor(id: string, title: string, date: number, images: string[], subTitle: string, content: string) {
 		this.id = id;
 		this.title = title;
 		this.date = date;
@@ -22,11 +22,13 @@ export class BlogPost {
 }
 
 export class BlogPhoto {
+	id: string;
 	title: string;
 	description: string;
 	url: string;
 
-	constructor(title: string, description: string, url: string) {
+	constructor(id: string, title: string, description: string, url: string) {
+		this.id = id;
 		this.title = title;
 		this.description = description;
 		this.url = url;

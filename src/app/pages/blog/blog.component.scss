@@ -1,0 +1,9 @@
+.blog-main {
+	.post {
+		display: flex;
+		width: 500px;
+		img {
+			max-height: 200px;
+		}
+	}
+}
