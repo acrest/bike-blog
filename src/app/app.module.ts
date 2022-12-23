@@ -19,6 +19,7 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { FormsModule } from '@angular/forms';
 import { BlogPostComponent } from './pages/blog-post/blog-post.component';
 import { BlogPhotoComponent } from './components/blog-photo/blog-photo.component';
+import { SignInComponent } from './pages/sign-in/sign-in.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { BlogPhotoComponent } from './components/blog-photo/blog-photo.component
     CreatePostComponent,
     LoadingComponent,
     BlogPostComponent,
-    BlogPhotoComponent
+    BlogPhotoComponent,
+    SignInComponent
   ],
   imports: [
     BrowserModule,

@@ -5,15 +5,15 @@ import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
 // Firebase
-import { initializeApp } from "firebase/app";
+import firebase from 'firebase/compat/app';
 import { getAnalytics } from "firebase/analytics";
 
 if (environment.production) {
   enableProdMode();
 }
 
-// const app = initializeApp(environment.firebaseConfig);
-// const analytics = getAnalytics(app);
+const app = firebase.initializeApp(environment.firebaseConfig);
+const analytics = getAnalytics(app);
 
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));

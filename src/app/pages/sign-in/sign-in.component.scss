@@ -1,0 +1,41 @@
+.sign-in {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: auto;
+    align-items: center;
+    .top-space {
+        flex-grow: 2;
+    }
+    .logo {
+        flex-grow: 1;
+        width: 80%;
+        text-align: center;
+        margin: 70px;
+    }
+    .sign-in-form {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 612px;
+        height: 352px;
+        background-color: #AEAEAE;
+        border: 3px solid #AEAEAE;
+        box-sizing: border-box;
+        border-radius: 18px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        text-align: center;
+        margin-top: 200px;
+        .sign-in-below {
+            width: 100%;
+            text-align: center;
+            font-size: 30px;
+        }
+    }
+    .bottom-space {
+        flex-grow: 2;
+    }
+}

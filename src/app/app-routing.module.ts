@@ -5,6 +5,7 @@ import { BlogPostComponent } from './pages/blog-post/blog-post.component';
 import { BlogComponent } from './pages/blog/blog.component';
 import { CreatePostComponent } from './pages/create-post/create-post.component';
 import { DealsComponent } from './pages/deals/deals.component';
+import { SignInComponent } from './pages/sign-in/sign-in.component';
 
 const routes: Routes = [
 	{path: "home", component: HomeComponent},
@@ -12,6 +13,7 @@ const routes: Routes = [
 	{path: "blog", component: BlogComponent},
 	{path: "create-post", component: CreatePostComponent},
 	{path: "post/:id", component: BlogPostComponent},
+	{path: "admin/sign-in", component: SignInComponent},
 	{path: "", component: BlogComponent}
 ];
 
