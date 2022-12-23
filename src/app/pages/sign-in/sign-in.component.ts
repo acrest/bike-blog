@@ -36,7 +36,7 @@ export class SignInComponent implements OnInit {
       },
       // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
       signInFlow: 'popup',
-      signInSuccessUrl: 'https://alecs-bike-blog.web.app/',
+      signInSuccessUrl: 'https://www.alecsbikeblog.com/',
       signInOptions: [
         {
           provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
@@ -49,9 +49,9 @@ export class SignInComponent implements OnInit {
         // firebase.auth.PhoneAuthProvider.PROVIDER_ID
       ],
       // Terms of service url.
-      tosUrl: 'https://alecs-bike-blog.web.app/',
+      tosUrl: 'https://www.alecsbikeblog.com/',
       // Privacy policy url.
-      privacyPolicyUrl: 'https://alecs-bike-blog.web.app/'
+      privacyPolicyUrl: 'https://www.alecsbikeblog.com/'
     };
     ui.start('#firebaseui-auth-container', uiConfig);
   }

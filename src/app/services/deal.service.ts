@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { map } from 'rxjs/operators';
 
-export enum BlogPostTag {
+export enum DealTag {
 	LIFESTYLE = "Lifestyle",
 	CROSS_COUNTRY = "XC",
 	ENDURO = "Enduro",
@@ -10,71 +10,55 @@ export enum BlogPostTag {
 	NEWS = "News"
 }
 
-export class BlogPost {
+export class Deal {
 	id: string;
 	title: string;
 	date: number;
-	images: string[];
-	subTitle: string;
+	imageUrl: string;
 	content: string;
 	tags: string[];
+	url: string;
+	urlName: string;
 
-	constructor(id: string, title: string, date: number, images: string[], subTitle: string, content: string, tags: string[]) {
+	public constructor(id: string, title: string, date: number, imageUrl: string, content: string, tags: string[], url: string, urlName: string) {
 		this.id = id;
 		this.title = title;
 		this.date = date;
-		this.images = images;
-		this.subTitle = subTitle;
+		this.imageUrl = imageUrl;
 		this.content = content;
 		this.tags = tags;
-	}
-}
-
-export class BlogPhoto {
-	id: string;
-	title: string;
-	description: string;
-	url: string;
-
-	constructor(id: string, title: string, description: string, url: string) {
-		this.id = id;
-		this.title = title;
-		this.description = description;
 		this.url = url;
-	}
-
-	public static getBlogPhotoFromString(jsonString: string): BlogPhoto {
-		return JSON.parse(jsonString);
+		this.urlName = urlName;
 	}
 }
 
 @Injectable({
   providedIn: 'root'
 })
-export class PostService {
+export class DealService {
 
-	private firebaseDocumentName: string = "blog-post";
+	private firebaseDocumentName: string = "deal";
 	constructor(private firestore: AngularFirestore) { }
 
-	public getAllBlogPosts(): Promise<any> {
-	  return new Promise<any>((resolve: (blogPosts: BlogPost[]) => void) => {
-		this.getBlogPost().subscribe((newBlogPosts: BlogPost[]) => {
+	public getAllDeals(): Promise<any> {
+	  return new Promise<any>((resolve: (blogPosts: Deal[]) => void) => {
+		this.getDeal().subscribe((newDeals: Deal[]) => {
 		  const promises: Promise<any>[] = [];
-		  newBlogPosts.forEach(async (newBlogPost: BlogPost) => {
-			console.log("newBlogPost", newBlogPost);
-			resolve(newBlogPosts);
+		  newDeals.forEach(async (newDeal: Deal) => {
+			console.log("newDeal", newDeal);
+			resolve(newDeals);
 		  })
 		})
 	  });
 	}
   
-	public getBlogPost() {
+	public getDeal() {
 	  return this.firestore.collection(this.firebaseDocumentName, ref => ref.where('title', '!=', "")).snapshotChanges().pipe(
 		map(action => {
-		  let blogPosts: BlogPost[] = [];
+		  let blogPosts: Deal[] = [];
 		  action.forEach((foundObject) => {
 			let blogPost;
-			const data = foundObject.payload.doc.data() as BlogPost;
+			const data = foundObject.payload.doc.data() as Deal;
 			if (data) {
 			  const id = foundObject.payload.doc.id;
 			  blogPost = { ...data };
@@ -86,12 +70,12 @@ export class PostService {
 	  );
 	}
   
-	public getBlogPostById(id: string) {
+	public getDealById(id: string) {
 	  return this.firestore.collection(this.firebaseDocumentName, ref => ref.where('id', '==', id)).snapshotChanges().pipe(
 		map(action => {
-		  let blogPost: BlogPost | undefined;
+		  let blogPost: Deal | undefined;
 		  action.forEach((foundObject) => {
-			const data = foundObject.payload.doc.data() as BlogPost;
+			const data = foundObject.payload.doc.data() as Deal;
 			if (data) {
 			  const id = foundObject.payload.doc.id;
 			  blogPost = { ...data };
@@ -103,16 +87,16 @@ export class PostService {
 	}
 
   
-	public createBlogPost(blogPost: BlogPost) {
+	public createDeal(blogPost: Deal) {
 	  return this.firestore.collection(this.firebaseDocumentName).add(Object.assign({}, blogPost));
 	}
   
-	// public updateBlogPost(blogPost: BlogPost) {
+	// public updateDeal(blogPost: Deal) {
 	//   delete blogPost.id;
 	//   return this.firestore.doc(this.firebaseDocumentName + '/' + blogPost.id).update(Object.assign({}, blogPost));
 	// }
   
-	public deleteBlogPost(blogPostId: string) {
+	public deleteDeal(blogPostId: string) {
 	  return this.firestore.doc(this.firebaseDocumentName + '/' + blogPostId).delete();
 	}
 }

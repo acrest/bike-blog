@@ -12,6 +12,10 @@
 </div>
 <input type="text" [(ngModel)]="content">
 
+<div *ngFor="let tag of possibleTagValues">
+	<input type="checkbox" (change)="tagUpdated(tag, $event)"> {{tag}}
+</div>
+
 <div>Photos</div>
 <div *ngFor="let photo of blogPhotos">
 	{{photo.id}} : {{photo.title}}

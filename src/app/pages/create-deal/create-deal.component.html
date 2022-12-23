@@ -1,0 +1,29 @@
+
+<div>
+	Title
+</div>
+<input type="text" [(ngModel)]="title">
+<div>
+	Content
+</div>
+<textarea [(ngModel)]="content"></textarea>
+<div>
+	URL
+</div>
+<input type="text" [(ngModel)]="url">
+<div>
+	URL Name
+</div>
+<input type="text" [(ngModel)]="urlName">
+<div>
+	Image URL (will autofill when a photo is uploaded)
+</div>
+<input type="text" [(ngModel)]="imageUrl">
+
+<div *ngFor="let tag of possibleTagValues">
+	<input type="checkbox" (change)="tagUpdated(tag, $event)"> {{tag}}
+</div>
+
+<button (click)="createDeal()">Create Deal</button>
+<button (click)="uploadPhoto()">Upload Photo</button>
+<app-upload *ngIf="isUploadingPhoto" [folderName]="'deals'" (newPhotoAdded)="newPhotoAdded($event)"></app-upload>

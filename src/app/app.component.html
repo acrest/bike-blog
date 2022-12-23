@@ -2,7 +2,9 @@
 	<app-nav-bar></app-nav-bar>
 	<div class="main-content">
 		<div class="sidebar left"></div>
-		<router-outlet></router-outlet>
+		<div class="main-content">
+			<router-outlet class="outlet"></router-outlet>
+		</div>
 		<div class="sidebar right"></div>
 	</div>
 	<footer> <small>&copy; Copyright {{currentYear}}, Alec Crestani</small> </footer>

@@ -20,6 +20,7 @@ import { FormsModule } from '@angular/forms';
 import { BlogPostComponent } from './pages/blog-post/blog-post.component';
 import { BlogPhotoComponent } from './components/blog-photo/blog-photo.component';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
+import { CreateDealComponent } from './pages/create-deal/create-deal.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { SignInComponent } from './pages/sign-in/sign-in.component';
     LoadingComponent,
     BlogPostComponent,
     BlogPhotoComponent,
-    SignInComponent
+    SignInComponent,
+    CreateDealComponent
   ],
   imports: [
     BrowserModule,

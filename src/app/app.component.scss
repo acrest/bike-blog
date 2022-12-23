@@ -3,7 +3,8 @@
 	margin-top: 20px;
 	width: 100%;
 	display: flex;
-	justify-content: space-between;
+	// justify-content: center;
+	// align-items: center;
 	.sidebar {
 		min-width: 160px;
 		max-width: 160px;
@@ -14,6 +15,10 @@
 		&.right {
 			margin-left: 20px;
 		}
+	}
+	.main-content {
+		flex-grow: 1;
+		justify-content: center;
 	}
 }
 footer {

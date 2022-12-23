@@ -1,1 +1,13 @@
-<p>deals works!</p>
+<div class="deal-main">
+	<div class="post" *ngFor="let deal of deals; let i=index">
+		<div class="content">
+			<div>
+				<div class="title">{{deal.title}}</div>
+			</div>
+			<div>
+				<div class="sub-title">{{deal.content}}</div>
+			</div>
+			<a href="{{deal.url}}" target="_blank">{{deal.urlName}}</a>
+		</div>
+	</div>
+</div>

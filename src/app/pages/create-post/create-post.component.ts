@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BlogPhoto, BlogPost, PostService } from 'src/app/services/post.service';
+import { BlogPhoto, BlogPost, BlogPostTag, PostService } from 'src/app/services/post.service';
 import { v4 as uuidv4 } from 'uuid';
 
 @Component({
@@ -15,6 +15,8 @@ export class CreatePostComponent implements OnInit {
 	public title: string;
 	public subTitle: string;
 	public content: string;
+	public tags: string[] = [];
+	public possibleTagValues = Object.keys(BlogPostTag);
 
   constructor(private postService: PostService) { }
 
@@ -26,7 +28,7 @@ export class CreatePostComponent implements OnInit {
 	this.blogPhotos.forEach((blogPhoto: BlogPhoto) => {
 		blogPhotoStrings.push(JSON.stringify(blogPhoto));
 	})
-	const blogPost: BlogPost = new BlogPost(uuidv4(), this.title, Date.now(), blogPhotoStrings, this.subTitle, this.content);
+	const blogPost: BlogPost = new BlogPost(uuidv4(), this.title, Date.now(), blogPhotoStrings, this.subTitle, this.content, this.tags);
 	this.postService.createBlogPost(blogPost);
   }
 
@@ -36,8 +38,19 @@ export class CreatePostComponent implements OnInit {
 
   public newPhotoAdded(blogPhoto: any) {
     this.blogPhotos.push(blogPhoto);
-	console.log("blogPhotos", this.blogPhotos)
     this.isUploadingPhoto = false;
+  }
+
+  public tagUpdated(tag: string, event: any): void {
+	if (event.target.checked)
+	{
+		this.tags.push(tag)
+	}
+	else
+	{
+		const index: number = this.tags.indexOf(tag);
+		this.tags.splice(index);
+	}
   }
 
 }
