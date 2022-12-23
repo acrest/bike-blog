@@ -1,3 +1,9 @@
-<app-nav-bar></app-nav-bar>
-<router-outlet></router-outlet>
-<footer> <small>&copy; Copyright {{currentYear}}, Alec Crestani</small> </footer>
+<div class="alecs-bike-blog">
+	<app-nav-bar></app-nav-bar>
+	<div class="main-content">
+		<div class="sidebar left"></div>
+		<router-outlet></router-outlet>
+		<div class="sidebar right"></div>
+	</div>
+	<footer> <small>&copy; Copyright {{currentYear}}, Alec Crestani</small> </footer>
+</div>

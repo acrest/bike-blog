@@ -17,6 +17,8 @@ import { UploadComponent } from './components/upload/upload.component';
 import { CreatePostComponent } from './pages/create-post/create-post.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { FormsModule } from '@angular/forms';
+import { BlogPostComponent } from './pages/blog-post/blog-post.component';
+import { BlogPhotoComponent } from './components/blog-photo/blog-photo.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { FormsModule } from '@angular/forms';
     DealsComponent,
     UploadComponent,
     CreatePostComponent,
-    LoadingComponent
+    LoadingComponent,
+    BlogPostComponent,
+    BlogPhotoComponent
   ],
   imports: [
     BrowserModule,

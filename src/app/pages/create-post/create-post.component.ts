@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BlogPhoto, BlogPost, PostService } from 'src/app/services/post.service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-create-post',
@@ -25,7 +26,7 @@ export class CreatePostComponent implements OnInit {
 	this.blogPhotos.forEach((blogPhoto: BlogPhoto) => {
 		blogPhotoStrings.push(JSON.stringify(blogPhoto));
 	})
-	const blogPost: BlogPost = new BlogPost("", this.title, Date.now(), blogPhotoStrings, this.subTitle, this.content);
+	const blogPost: BlogPost = new BlogPost(uuidv4(), this.title, Date.now(), blogPhotoStrings, this.subTitle, this.content);
 	this.postService.createBlogPost(blogPost);
   }
 

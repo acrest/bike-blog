@@ -1,0 +1,32 @@
+.main-content {
+	flex-grow: 1;
+	margin-top: 20px;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	.sidebar {
+		min-width: 160px;
+		max-width: 160px;
+		background-color: red;
+		&.left {
+			margin-right: 20px;
+		}
+		&.right {
+			margin-left: 20px;
+		}
+	}
+}
+footer {
+	margin-top: 50px;
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+	margin-bottom: 20px;
+}
+
+.alecs-bike-blog {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}

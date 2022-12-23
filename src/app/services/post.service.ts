@@ -76,6 +76,22 @@ export class PostService {
 		})
 	  );
 	}
+  
+	public getBlogPostById(id: string) {
+	  return this.firestore.collection(this.firebaseDocumentName, ref => ref.where('id', '==', id)).snapshotChanges().pipe(
+		map(action => {
+		  let blogPost: BlogPost | undefined;
+		  action.forEach((foundObject) => {
+			const data = foundObject.payload.doc.data() as BlogPost;
+			if (data) {
+			  const id = foundObject.payload.doc.id;
+			  blogPost = { ...data };
+			}
+		  });
+		  return blogPost;
+		})
+	  );
+	}
 
   
 	public createBlogPost(blogPost: BlogPost) {

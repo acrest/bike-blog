@@ -1,0 +1,8 @@
+<div class="blog-post">
+	<div *ngIf="post">
+		<div>{{post.title}}</div>
+		<div>{{post.subTitle}}</div>
+		<div>{{post.date}}</div>
+	</div>
+	<div #contentDiv class="content" [innerHTML]="sanitizedText"></div>
+</div>

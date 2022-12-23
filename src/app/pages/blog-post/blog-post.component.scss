@@ -1,0 +1,28 @@
+.blog-post {
+	app-blog-photo {
+		height: 200px;
+		width: 200px;
+	}
+	.content {
+		height: 500px;
+	}
+	.embedded-image {
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
+
+		img {
+			margin: auto;
+			max-height: 200px;
+			max-width: 200px;
+		}
+		.title {
+			margin: auto;
+			font-size: 20px;
+			font-weight: bold;
+		}
+		.description {
+			margin: auto;
+		}
+	}
+}
