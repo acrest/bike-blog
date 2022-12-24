@@ -1,11 +1,15 @@
 <div class="deal-main">
-	<div class="post" *ngFor="let deal of deals; let i=index">
+	<div class="deal" *ngFor="let deal of deals; let i=index">
+		<img *ngIf="deal.imageUrl" src="{{deal.imageUrl}}">
 		<div class="content">
 			<div>
 				<div class="title">{{deal.title}}</div>
 			</div>
 			<div>
 				<div class="sub-title">{{deal.content}}</div>
+			</div>
+			<div>
+				<div class="date">{{ deal.date | date: "M/d/YYYY"}}</div>
 			</div>
 			<a href="{{deal.url}}" target="_blank">{{deal.urlName}}</a>
 		</div>

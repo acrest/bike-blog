@@ -21,6 +21,8 @@ import { BlogPostComponent } from './pages/blog-post/blog-post.component';
 import { BlogPhotoComponent } from './components/blog-photo/blog-photo.component';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { CreateDealComponent } from './pages/create-deal/create-deal.component';
+import {YouTubePlayerModule} from '@angular/youtube-player';
+import { AttachVideoComponent } from './components/attach-video/attach-video.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import { CreateDealComponent } from './pages/create-deal/create-deal.component';
     BlogPostComponent,
     BlogPhotoComponent,
     SignInComponent,
-    CreateDealComponent
+    CreateDealComponent,
+    AttachVideoComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +47,8 @@ import { CreateDealComponent } from './pages/create-deal/create-deal.component';
 	AngularFireStorageModule,
 	AuthModule,
 	AngularFireDatabaseModule,
-	FormsModule
+	FormsModule,
+	YouTubePlayerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

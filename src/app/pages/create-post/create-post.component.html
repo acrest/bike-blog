@@ -1,27 +1,38 @@
+<div class="create-post">
+	<div>
+		Title
+	</div>
+	<input type="text" [(ngModel)]="title">
+	<div>
+		Sub-Title
+	</div>
+	<input type="text" [(ngModel)]="subTitle">
+	<div>
+		Content
+	</div>
+	<textarea [(ngModel)]="content"></textarea>
+	
+	<div *ngFor="let tag of possibleTagValues">
+		<input type="checkbox" (change)="tagUpdated(tag, $event)"> {{tag}}
+	</div>
+	
+	<div *ngIf="blogPhotos?.length > 0">Photos</div>
+	<div *ngFor="let photo of blogPhotos">
+		{{photo.id}} : {{photo.title}}
+	</div>
 
-<div>
-	Title
-</div>
-<input type="text" [(ngModel)]="title">
-<div>
-	Sub-Title
-</div>
-<input type="text" [(ngModel)]="subTitle">
-<div>
-	Content
-</div>
-<input type="text" [(ngModel)]="content">
+	<div *ngIf="blogVideos?.length > 0">Videos</div>
+	<div *ngFor="let video of blogVideos">
+		{{video.id}} : {{video.title}}
+	</div>
+	
+	<div class="actions">
+		<button (click)="uploadPhoto()">Upload Photo</button>
+		<app-upload *ngIf="isUploadingPhoto" [folderName]="'posts'" (newPhotoAdded)="newPhotoAdded($event)"></app-upload>
+		
+		<button (click)="attachVideo()">Attach Video</button>
+		<app-attach-video *ngIf="isAttachingVideo" (newVideoAdded)="newVideoAttached($event)"></app-attach-video>
 
-<div *ngFor="let tag of possibleTagValues">
-	<input type="checkbox" (change)="tagUpdated(tag, $event)"> {{tag}}
+		<button class="create-post-button" (click)="createPost()">Create Post</button>
+	</div>
 </div>
-
-<div>Photos</div>
-<div *ngFor="let photo of blogPhotos">
-	{{photo.id}} : {{photo.title}}
-</div>
-
-
-<button (click)="createPost()">Create Post</button>
-<button (click)="uploadPhoto()">Upload Photo</button>
-<app-upload *ngIf="isUploadingPhoto" [folderName]="'posts'" (newPhotoAdded)="newPhotoAdded($event)"></app-upload>

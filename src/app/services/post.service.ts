@@ -15,15 +15,17 @@ export class BlogPost {
 	title: string;
 	date: number;
 	images: string[];
+	videos: string[];
 	subTitle: string;
 	content: string;
 	tags: string[];
 
-	constructor(id: string, title: string, date: number, images: string[], subTitle: string, content: string, tags: string[]) {
+	constructor(id: string, title: string, date: number, images: string[], videos: string[], subTitle: string, content: string, tags: string[]) {
 		this.id = id;
 		this.title = title;
 		this.date = date;
 		this.images = images;
+		this.videos = videos;
 		this.subTitle = subTitle;
 		this.content = content;
 		this.tags = tags;
@@ -44,6 +46,22 @@ export class BlogPhoto {
 	}
 
 	public static getBlogPhotoFromString(jsonString: string): BlogPhoto {
+		return JSON.parse(jsonString);
+	}
+}
+
+export class BlogVideo {
+	id: string;
+	title: string;
+	description: string;
+
+	constructor(id: string, title: string, description: string) {
+		this.id = id;
+		this.title = title;
+		this.description = description;
+	}
+
+	public static getBlogVideoFromString(jsonString: string): BlogVideo {
 		return JSON.parse(jsonString);
 	}
 }

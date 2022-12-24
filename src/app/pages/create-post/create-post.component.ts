@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BlogPhoto, BlogPost, BlogPostTag, PostService } from 'src/app/services/post.service';
+import { BlogPhoto, BlogPost, BlogPostTag, BlogVideo, PostService } from 'src/app/services/post.service';
 import { v4 as uuidv4 } from 'uuid';
 
 @Component({
@@ -10,8 +10,10 @@ import { v4 as uuidv4 } from 'uuid';
 export class CreatePostComponent implements OnInit {
 
 	public isUploadingPhoto: boolean = false;
+	public isAttachingVideo: boolean = false;
 
 	public blogPhotos: BlogPhoto[] = [];
+	public blogVideos: BlogVideo[] = [];
 	public title: string;
 	public subTitle: string;
 	public content: string;
@@ -25,20 +27,40 @@ export class CreatePostComponent implements OnInit {
 
   public createPost(): void {
 	const blogPhotoStrings: string[] = [];
+	const blogVideoStrings: string[] = [];
 	this.blogPhotos.forEach((blogPhoto: BlogPhoto) => {
 		blogPhotoStrings.push(JSON.stringify(blogPhoto));
 	})
-	const blogPost: BlogPost = new BlogPost(uuidv4(), this.title, Date.now(), blogPhotoStrings, this.subTitle, this.content, this.tags);
-	this.postService.createBlogPost(blogPost);
+	this.blogVideos.forEach((blogVideo: BlogVideo) => {
+		blogVideoStrings.push(JSON.stringify(blogVideo));
+	})
+	const blogPost: BlogPost = new BlogPost(uuidv4(), this.title, Date.now(), blogPhotoStrings, blogVideoStrings, this.subTitle, this.content, this.tags);
+	this.postService.createBlogPost(blogPost).then(() => {
+		this.blogPhotos = [];
+		this.blogVideos = [];
+		this.title = "";
+		this.subTitle = "";
+		this.content = "";
+		this.tags = [];
+	});
   }
 
   public uploadPhoto() {
     this.isUploadingPhoto = true;
   }
 
-  public newPhotoAdded(blogPhoto: any) {
+  public attachVideo() {
+    this.isAttachingVideo = true;
+  }
+
+  public newPhotoAdded(blogPhoto: BlogPhoto) {
     this.blogPhotos.push(blogPhoto);
     this.isUploadingPhoto = false;
+  }
+
+  public newVideoAttached(blogVido: BlogVideo) {
+    this.blogVideos.push(blogVido);
+    this.isAttachingVideo = false;
   }
 
   public tagUpdated(tag: string, event: any): void {

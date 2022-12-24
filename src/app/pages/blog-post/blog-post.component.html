@@ -5,4 +5,9 @@
 		<div>{{post.date}}</div>
 	</div>
 	<div #contentDiv class="content" [innerHTML]="sanitizedText"></div>
+	<ng-container *ngIf="videos?.length > 0">
+		<div *ngFor="let video of videos">
+			<youtube-player id="{{video.id}}" [videoId]="video.id"></youtube-player>
+		</div>
+	</ng-container>
 </div>
