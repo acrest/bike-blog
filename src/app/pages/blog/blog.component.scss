@@ -1,26 +1,40 @@
 .blog-main {
 	display: flex;
-	flex-direction: column;
+	text-align: center;
 	gap: 10px;
-	.post {
-		cursor: pointer;
+	.posts {
 		display: flex;
-		width: 500px;
-		img {
-			max-height: 100px;
-			margin-right: 20px;
+		gap: 10px;
+		flex-direction: column;
+		.post {
+			justify-content: center;
+			cursor: pointer;
+			display: flex;
+			width: 500px;
+			img {
+				max-height: 100px;
+				margin-right: 20px;
+			}
+			.content {
+				margin-top: auto;
+				margin-bottom: auto;
+			}
+			.title {
+				font-weight: bold;
+				font-size: 20px;
+			}
+			.sub-title {
+	
+			}
 		}
-		.content {
-			margin-top: auto;
-			margin-bottom: auto;
-		}
-		.title {
-			font-weight: bold;
-			font-size: 20px;
-		}
-		.sub-title {
-
-		}
+	}
+	.strava-feed {
+		display: flex;
+		flex-direction: column;
+	}
+	.strava-stats {
+		display: flex;
+		flex-direction: column;
 	}
 }
 footer {
