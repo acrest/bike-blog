@@ -9,22 +9,26 @@ import { BlogPhoto, BlogPost, PostService } from 'src/app/services/post.service'
 })
 export class BlogComponent implements OnInit {
 
-  constructor(private postService: PostService, private router: Router) { }
+
+	public currentYear: number;
+	constructor(private postService: PostService, private router: Router) {
+		this.currentYear = (new Date()).getFullYear();
+	}
   
-  public posts: BlogPost[];
-  public blogPhotos: BlogPhoto[] = [];
+	public posts: BlogPost[];
+	public blogPhotos: BlogPhoto[] = [];
 
-  ngOnInit(): void {
-	this.postService.getBlogPost().subscribe((posts: BlogPost[]) => {
-		this.posts = posts;
-		this.posts.forEach((post: BlogPost) => {
-			this.blogPhotos.push(JSON.parse(post.images[0]))
+	ngOnInit(): void {
+		this.postService.getBlogPost().subscribe((posts: BlogPost[]) => {
+			this.posts = posts;
+			this.posts.forEach((post: BlogPost) => {
+				this.blogPhotos.push(JSON.parse(post.images[0]))
+			})
+			console.log("posts", this.posts);
 		})
-		console.log("posts", this.posts);
-      })
-  }
+	}
 
-  public goToPost(id: string): void {
-	this.router.navigate(["post/" + id]);
-  }
+	public goToPost(id: string): void {
+		this.router.navigate(["post/" + id]);
+	}
 }
