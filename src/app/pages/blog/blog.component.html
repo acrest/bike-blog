@@ -4,16 +4,20 @@
 	</div>
 	<div class="posts">
 		<div class="post" *ngFor="let post of posts; let i=index" (click)="goToPost(post.id)">
-			<img *ngIf="blogPhotos[i]" src="{{blogPhotos[i]?.url}}">
-			<div class="content">
-				<div>
-					<div class="title">{{post.title}}</div>
-				</div>
-				<div>
-					<div class="sub-title">{{post.subTitle}}</div>
-				</div>
-				<div>
-					<div class="date">{{ post.date | date: "M/d/YYYY"}}</div>
+			<div class="photo-wrapper">
+				<img *ngIf="blogPhotos[i]" src="{{blogPhotos[i]?.url}}">
+			</div>
+			<div class="content-wrapper">
+				<div class="content">
+					<div>
+						<div class="title">{{post.title}}</div>
+					</div>
+					<div>
+						<div class="sub-title">{{post.subTitle}}</div>
+					</div>
+					<div>
+						<div class="date">{{ post.date | date: "M/d/YYYY"}}</div>
+					</div>
 				</div>
 			</div>
 		</div>

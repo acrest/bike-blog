@@ -11,20 +11,30 @@
 			cursor: pointer;
 			display: flex;
 			width: 500px;
-			img {
-				max-height: 100px;
+			.photo-wrapper {
+				height: 110px;
+				width: 150px;
+				display: flex;
 				margin-right: 20px;
+				img {
+					margin: auto;
+					max-height: 100px;
+					max-width: 140px;
+				}
 			}
-			.content {
-				margin-top: auto;
-				margin-bottom: auto;
-			}
-			.title {
-				font-weight: bold;
-				font-size: 20px;
-			}
-			.sub-title {
-	
+			.content-wrapper {
+				flex-grow: 1;
+				display: flex;
+				.content {
+					margin: auto;
+				}
+				.title {
+					font-weight: bold;
+					font-size: 20px;
+				}
+				.sub-title {
+					font-style: italic;
+				}
 			}
 		}
 	}
