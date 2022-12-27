@@ -7,7 +7,8 @@ export enum BlogPostTag {
 	CROSS_COUNTRY = "XC",
 	ENDURO = "Enduro",
 	ROAD = "Road",
-	NEWS = "News"
+	NEWS = "News",
+	TRAILS = "Trails"
 }
 
 export class BlogPost {
