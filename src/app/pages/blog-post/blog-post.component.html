@@ -1,13 +1,28 @@
 <div class="blog-post">
-	<div *ngIf="post">
-		<div>{{post.title}}</div>
-		<div>{{post.subTitle}}</div>
-		<div>{{post.date}}</div>
+	<div *ngIf="post" class="topic">
+		<div class="title">{{post.title}}</div>
+		<div class="sub-title">{{post.subTitle}}</div>
+		<div class="date">{{ post.date | date: "M/d/YYYY"}}</div>
 	</div>
 	<div #contentDiv class="content" [innerHTML]="sanitizedText"></div>
 	<ng-container *ngIf="videos?.length > 0">
 		<div *ngFor="let video of videos">
 			<youtube-player id="{{video.id}}" [videoId]="video.id"></youtube-player>
+		</div>
+	</ng-container>
+	<ng-container *ngIf="stravas?.length > 0">
+		<div id="{{strava.id}}" *ngFor="let strava of stravas" class="strava-activity">
+			(Strava embed currently not functioning go here to view <a href="https://www.strava.com/activities/{{strava.id}}/overview">Strava Link</a>)
+			<div class="strava-embed-placeholder" data-embed-type="activity" data-embed-id="7750115459"></div><script src="https://strava-embeds.com/embed.js"></script>
+		</div>
+	</ng-container>
+	<ng-container *ngIf="photos?.length > 0">
+		<div *ngFor="let photo of photos">
+			<div id="{{photo.id}}" class="embedded-image">
+				<img src="{{photo.url}}">
+				<div class="title">{{photo.title}}</div>
+				<div class="description">{{photo.description}}</div>
+			</div>
 		</div>
 	</ng-container>
 </div>

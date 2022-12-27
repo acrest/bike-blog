@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BlogPhoto, BlogPost, BlogPostTag, BlogVideo, PostService } from 'src/app/services/post.service';
+import { BlogPhoto, BlogPost, BlogPostTag, BlogStrava, BlogVideo, PostService } from 'src/app/services/post.service';
 import { v4 as uuidv4 } from 'uuid';
 
 @Component({
@@ -11,9 +11,11 @@ export class CreatePostComponent implements OnInit {
 
 	public isUploadingPhoto: boolean = false;
 	public isAttachingVideo: boolean = false;
+	public isAttachingStrava: boolean = false;
 
 	public blogPhotos: BlogPhoto[] = [];
 	public blogVideos: BlogVideo[] = [];
+	public stravas: BlogStrava[] = [];
 	public title: string;
 	public subTitle: string;
 	public content: string;
@@ -28,16 +30,21 @@ export class CreatePostComponent implements OnInit {
   public createPost(): void {
 	const blogPhotoStrings: string[] = [];
 	const blogVideoStrings: string[] = [];
+	const blogStravaStrings: string[] = [];
 	this.blogPhotos.forEach((blogPhoto: BlogPhoto) => {
 		blogPhotoStrings.push(JSON.stringify(blogPhoto));
 	})
 	this.blogVideos.forEach((blogVideo: BlogVideo) => {
 		blogVideoStrings.push(JSON.stringify(blogVideo));
 	})
-	const blogPost: BlogPost = new BlogPost(uuidv4(), this.title, Date.now(), blogPhotoStrings, blogVideoStrings, this.subTitle, this.content, this.tags);
+	this.stravas.forEach((blogStrava: BlogStrava) => {
+		blogStravaStrings.push(JSON.stringify(blogStrava));
+	});
+	const blogPost: BlogPost = new BlogPost(uuidv4(), this.title, Date.now(), blogPhotoStrings, blogVideoStrings, blogStravaStrings, this.subTitle, this.content, this.tags);
 	this.postService.createBlogPost(blogPost).then(() => {
 		this.blogPhotos = [];
 		this.blogVideos = [];
+		this.stravas = [];
 		this.title = "";
 		this.subTitle = "";
 		this.content = "";
@@ -53,14 +60,23 @@ export class CreatePostComponent implements OnInit {
     this.isAttachingVideo = true;
   }
 
+  public attachStrava() {
+    this.isAttachingStrava = true;
+  }
+
   public newPhotoAdded(blogPhoto: BlogPhoto) {
     this.blogPhotos.push(blogPhoto);
     this.isUploadingPhoto = false;
   }
 
-  public newVideoAttached(blogVido: BlogVideo) {
-    this.blogVideos.push(blogVido);
+  public newVideoAttached(blogVideo: BlogVideo) {
+    this.blogVideos.push(blogVideo);
     this.isAttachingVideo = false;
+  }
+
+  public newStravaAttached(blogStrava: BlogStrava) {
+    this.stravas.push(blogStrava);
+    this.isAttachingStrava = false;
   }
 
   public tagUpdated(tag: string, event: any): void {

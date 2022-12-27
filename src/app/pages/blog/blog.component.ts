@@ -19,7 +19,7 @@ export class BlogComponent implements OnInit {
 	public blogPhotos: BlogPhoto[] = [];
 
 	ngOnInit(): void {
-		this.postService.getBlogPost().subscribe((posts: BlogPost[]) => {
+		this.postService.getAllBlogPosts().subscribe((posts: BlogPost[]) => {
 			this.posts = posts;
 			this.posts.forEach((post: BlogPost) => {
 				this.blogPhotos.push(JSON.parse(post.images[0]))

@@ -32,6 +32,9 @@
 		
 		<button (click)="attachVideo()">Attach Video</button>
 		<app-attach-video *ngIf="isAttachingVideo" (newVideoAdded)="newVideoAttached($event)"></app-attach-video>
+		
+		<button (click)="attachStrava()">Attach Video</button>
+		<app-attach-strava *ngIf="isAttachingStrava" (newStravaAdded)="newStravaAttached($event)"></app-attach-strava>
 
 		<button class="create-post-button" (click)="createPost()">Create Post</button>
 	</div>

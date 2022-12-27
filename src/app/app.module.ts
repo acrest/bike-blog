@@ -23,6 +23,7 @@ import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { CreateDealComponent } from './pages/create-deal/create-deal.component';
 import {YouTubePlayerModule} from '@angular/youtube-player';
 import { AttachVideoComponent } from './components/attach-video/attach-video.component';
+import { AttachStravaComponent } from './components/attach-strava/attach-strava.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { AttachVideoComponent } from './components/attach-video/attach-video.com
     BlogPhotoComponent,
     SignInComponent,
     CreateDealComponent,
-    AttachVideoComponent
+    AttachVideoComponent,
+	AttachStravaComponent
   ],
   imports: [
     BrowserModule,

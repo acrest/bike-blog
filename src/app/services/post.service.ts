@@ -17,16 +17,18 @@ export class BlogPost {
 	date: number;
 	images: string[];
 	videos: string[];
+	stravas: string[];
 	subTitle: string;
 	content: string;
 	tags: string[];
 
-	constructor(id: string, title: string, date: number, images: string[], videos: string[], subTitle: string, content: string, tags: string[]) {
+	constructor(id: string, title: string, date: number, images: string[], videos: string[], stravas: string[], subTitle: string, content: string, tags: string[]) {
 		this.id = id;
 		this.title = title;
 		this.date = date;
 		this.images = images;
 		this.videos = videos;
+		this.stravas = stravas;
 		this.subTitle = subTitle;
 		this.content = content;
 		this.tags = tags;
@@ -67,6 +69,22 @@ export class BlogVideo {
 	}
 }
 
+export class BlogStrava {
+	id: string;
+	title: string;
+	description: string;
+
+	constructor(id: string, title: string, description: string) {
+		this.id = id;
+		this.title = title;
+		this.description = description;
+	}
+
+	public static getBlogStravaFromString(jsonString: string): BlogVideo {
+		return JSON.parse(jsonString);
+	}
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -74,21 +92,9 @@ export class PostService {
 
 	private firebaseDocumentName: string = "blog-post";
 	constructor(private firestore: AngularFirestore) { }
-
-	public getAllBlogPosts(): Promise<any> {
-	  return new Promise<any>((resolve: (blogPosts: BlogPost[]) => void) => {
-		this.getBlogPost().subscribe((newBlogPosts: BlogPost[]) => {
-		  const promises: Promise<any>[] = [];
-		  newBlogPosts.forEach(async (newBlogPost: BlogPost) => {
-			console.log("newBlogPost", newBlogPost);
-			resolve(newBlogPosts);
-		  })
-		})
-	  });
-	}
   
-	public getBlogPost() {
-	  return this.firestore.collection(this.firebaseDocumentName, ref => ref.where('title', '!=', "")).snapshotChanges().pipe(
+	public getAllBlogPosts() {
+	  return this.firestore.collection(this.firebaseDocumentName, ref => ref.orderBy("date", "desc")).snapshotChanges().pipe(
 		map(action => {
 		  let blogPosts: BlogPost[] = [];
 		  action.forEach((foundObject) => {
