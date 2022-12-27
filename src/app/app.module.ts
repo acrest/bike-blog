@@ -16,7 +16,6 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { UploadComponent } from './components/upload/upload.component';
 import { CreatePostComponent } from './pages/create-post/create-post.component';
 import { LoadingComponent } from './components/loading/loading.component';
-import { FormsModule } from '@angular/forms';
 import { BlogPostComponent } from './pages/blog-post/blog-post.component';
 import { BlogPhotoComponent } from './components/blog-photo/blog-photo.component';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
@@ -24,6 +23,21 @@ import { CreateDealComponent } from './pages/create-deal/create-deal.component';
 import {YouTubePlayerModule} from '@angular/youtube-player';
 import { AttachVideoComponent } from './components/attach-video/attach-video.component';
 import { AttachStravaComponent } from './components/attach-strava/attach-strava.component';
+import { BikeBuilderComponent } from './pages/bike-builder/bike-builder.component';
+
+//Material
+import { MatRadioModule } from '@angular/material/radio';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CompatibilityComponent } from './components/compatibility/compatibility.component';
+import { DimensionsComponent } from './components/dimensions/dimensions.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -40,7 +54,10 @@ import { AttachStravaComponent } from './components/attach-strava/attach-strava.
     SignInComponent,
     CreateDealComponent,
     AttachVideoComponent,
-	AttachStravaComponent
+	AttachStravaComponent,
+ 	BikeBuilderComponent,
+	CompatibilityComponent,
+	DimensionsComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +67,17 @@ import { AttachStravaComponent } from './components/attach-strava/attach-strava.
 	AuthModule,
 	AngularFireDatabaseModule,
 	FormsModule,
-	YouTubePlayerModule
+	YouTubePlayerModule,
+    MatRadioModule,
+    MatButtonModule,
+    MatInputModule,
+    MatSelectModule,
+    FormsModule,
+    MatSlideToggleModule,
+    MatFormFieldModule,
+    MatCardModule,
+    MatProgressSpinnerModule,
+	BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

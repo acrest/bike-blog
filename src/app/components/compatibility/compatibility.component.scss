@@ -1,0 +1,27 @@
+.compatibility-component {
+
+    .descriptions {
+        margin-top: 5px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .dot {
+        height: 15px;
+        width: 15px;
+        border-radius: 50%;
+        border-color: black;
+        border-width: 2px;
+        display: inline-block;
+        margin: auto;
+        &.green {
+            background-color: green;
+        }
+        &.red {
+            background-color: red;
+        }
+        &.yellow {
+            background-color: yellow;
+        }
+    }
+}

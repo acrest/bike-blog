@@ -1,0 +1,158 @@
+<div class="bike-builder-page">
+    Still need to add ability to use components in garage and add to bike
+    <div *ngIf="!bike && !loading" class="bike-start">
+        <div>
+            <div>What type of frame will you build from?</div>
+            <mat-radio-group aria-label="Select a suspension" (change)="chooseSuspension($event)">
+                <mat-radio-button class="example-radio-button" *ngFor="let suspensionOption of suspensions" [value]="suspensionOption">
+                    {{suspensionOption}}
+                  </mat-radio-button>
+              </mat-radio-group>
+        </div>
+        <div>
+            <div>What will be the type of your drivetrain?</div>
+            <mat-radio-group aria-label="Select a drivetrain" (change)="chooseDrivetrain($event)">
+                <mat-radio-button class="example-radio-button" *ngFor="let drivetrainOption of drivetrains" [value]="drivetrainOption">
+                    {{drivetrainOption}}
+                  </mat-radio-button>
+              </mat-radio-group>
+        </div>
+        <button mat-flat-button [disabled]="!suspension || !drivetrain" (click)="startBikeBuilding()">Continue</button>
+    </div>
+
+    <div *ngIf="bike" class="bike-options">
+        <button *ngIf="userId" (click)="saveCurrentBike()">Save Bike</button>
+        <button (click)="clearCurrentBike()">Clear Bike</button>
+        Name:
+        <input type="text" placeholder="Ex. Ripmo" [(ngModel)]="bike.name" name="bikeName">
+        <button (click)="uploadPhoto()">Upload Bike Photo</button>
+    </div>
+    <div *ngIf="bike" class="component-list-and-pic">
+        <div class="components">
+            <div class="component-button" [ngClass]="{'selected': component.value === selectedComponent}" *ngFor="let component of bike.components | keyvalue" >
+                <span *ngIf="component.value.getIsCompatible(bike) === 'COMPATIBLE'" class="dot green"></span>
+                <span *ngIf="component.value.getIsCompatible(bike) === 'NOT_COMPATIBLE'" class="dot red"></span>
+                <span *ngIf="component.value.getIsCompatible(bike) === 'MISSING'" class="dot yellow"></span>
+                <button class="select" mat-button (click)="selectComponent(component.key)">{{component.key}}</button>
+            </div>
+        </div>
+        <div class="bike-info">
+            <img *ngIf="bike.photoUrl" id="bike-photo" [src]="bike.photoUrl">
+            <div class="upload-photo-message-wrapper" *ngIf="!bike.photoUrl">
+                <div class="upload-photo-message">
+                    Photo Not Uploaded
+                </div>
+            </div>
+            <div>
+                <div>
+                    Current Component: {{selectedComponent?.type}}
+                </div>
+                <div>
+                    Bike Total weight: {{bike.totalWeightInGrams}} grams
+                </div>
+                <div>
+                    Bike Total cost: ${{bike.totalCost}}
+                </div>
+            </div>
+        </div>
+        <app-compatibility class="compatibliity-list" [bike]="bike" [selectedComponent]="selectedComponent" (goToComponentEvent)="goToComponent($event)"></app-compatibility>
+    </div>
+
+    <div *ngIf="bike && selectedComponent" class="bike-component-info">
+        <form class="component-form">
+            <mat-form-field class="example-full-width">
+                <mat-label>Weight (grams)</mat-label>
+                <input [disabled]="selectedComponent.type === 'Other'" matInput type="number" placeholder="Ex. 190" [(ngModel)]="selectedComponent.weightInGrams" name="weight" (change)="onComponentWeightChange()">
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Cost ($)</mat-label>
+                <input [disabled]="selectedComponent.type === 'Other'" matInput type="number" placeholder="Ex. 190" [(ngModel)]="selectedComponent.cost" name="cost" (change)="onComponentCostChange()">
+            </mat-form-field>
+            <ng-container *ngIf="selectedComponent.type !== 'Other'">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Year</mat-label>
+                    <input matInput type="number" placeholder="Ex. 190" [(ngModel)]="selectedComponent.year" name="year">
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Brand</mat-label>
+                    <input matInput type="text" placeholder="Ex. 190" [(ngModel)]="selectedComponent.brand" name="brand">
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Model</mat-label>
+                    <input matInput type="text" placeholder="Ex. 190" [(ngModel)]="selectedComponent.model" name="model">
+                </mat-form-field>
+            </ng-container>
+            <mat-form-field class="example-full-width">
+                <mat-label>Notes</mat-label>
+                <textarea matInput placeholder="Ex. 190" [(ngModel)]="selectedComponent.notes" name="notes"></textarea>
+            </mat-form-field>
+        </form>
+
+        <div class="dimensions">
+            <app-dimensions *ngIf="selectedComponent.type !== 'Other'" [component]='selectedComponent'></app-dimensions>
+            <div *ngIf="selectedComponent.type === 'Other'">
+                <div *ngFor="let otherComponent of selectedOtherComponent.items; let i = index">
+                    <button (click)="selectedOtherComponent.removeItemFromArray(i)">Remove Item</button>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Name</mat-label>
+                        <input disabled matInput type="text" placeholder="Ex. 190" [(ngModel)]="otherComponent.name" name="otherName">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Weight (grams)</mat-label>
+                        <input disabled matInput type="number" placeholder="Ex. 190" [(ngModel)]="otherComponent.weightInGrams" name="otherWeight">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Cost ($)</mat-label>
+                        <input disabled matInput type="number" placeholder="Ex. 190" [(ngModel)]="otherComponent.cost" name="otherCost">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Brand</mat-label>
+                        <input disabled matInput type="text" placeholder="Ex. 190" [(ngModel)]="otherComponent.brand" name="otherBrand">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Model</mat-label>
+                        <input disabled matInput type="text" placeholder="Ex. 190" [(ngModel)]="otherComponent.model" name="otherModel">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Notes</mat-label>
+                        <textarea matInput placeholder="Ex. 190"  [(ngModel)]="otherComponent.additionalNotes" name="otherNotes"></textarea>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <button (click)="selectedOtherComponent.addItemToArray()">Add Item</button>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Name</mat-label>
+                        <input matInput type="text" placeholder="Ex. 190" [(ngModel)]="selectedOtherComponent.itemToBeAdded.name" name="otherName">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Weight (grams)</mat-label>
+                        <input matInput type="number" placeholder="Ex. 190" [(ngModel)]="selectedOtherComponent.itemToBeAdded.weightInGrams" name="otherWeight">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Cost ($)</mat-label>
+                        <input matInput type="number" placeholder="Ex. 190" [(ngModel)]="selectedOtherComponent.itemToBeAdded.cost" name="otherCost">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Brand</mat-label>
+                        <input matInput type="text" placeholder="Ex. 190" [(ngModel)]="selectedOtherComponent.itemToBeAdded.brand" name="otherBrand">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Model</mat-label>
+                        <input matInput type="text" placeholder="Ex. 190" [(ngModel)]="selectedOtherComponent.itemToBeAdded.model" name="otherModel">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Notes</mat-label>
+                        <textarea matInput placeholder="Ex. 190"  [(ngModel)]="selectedOtherComponent.itemToBeAdded.additionalNotes" name="otherNotes"></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="compatibility">
+            
+        </div>
+    </div>
+    <div *ngIf="bike && !selectedComponent" class="bike-component-info">Select a component to view the details here</div>
+</div>
+<app-loading *ngIf="saving" [loadingText]="'Saving...'"></app-loading>
+<app-loading *ngIf="loading" [loadingText]="'Loading...'"></app-loading>
+<!-- <app-photo-uploader *ngIf="isUploadingPhoto" [folderName]="'bikes'" (downloadUrl)="photoUploaded($event)"></app-photo-uploader> -->

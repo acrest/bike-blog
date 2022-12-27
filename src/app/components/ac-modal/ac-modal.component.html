@@ -1,0 +1,16 @@
+<div class="ac-modal">
+  <div class="modal-interior">
+    <div class="title" *ngIf="title">{{title}}</div>
+    <div *ngIf="modalText" class="content text-content">
+      {{modalText}}
+    </div>
+    <div *ngIf="htmlTemplate" class="content html-content">
+      <ng-container class="html-container" *ngTemplateOutlet="htmlTemplate"></ng-container>
+    </div>
+    <div class="actions" *ngIf="buttons">
+      <button *ngFor="let button of buttons">
+        button text
+      </button>
+    </div>
+  </div>
+</div>

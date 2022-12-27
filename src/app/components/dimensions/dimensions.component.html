@@ -1,0 +1,23 @@
+<div class="component-dimensions">
+    <form class="component-form">
+        <!-- make this a component -->
+        <ng-container *ngFor="let dimension of component.dimensions | keyvalue">
+            <mat-form-field>
+                <ng-container *ngIf="dimension.value.type === 'ENUM'">
+                        <mat-label>{{dimension.value.label}}</mat-label>
+                        <mat-select [(value)]="dimension.value.value">
+                            <mat-option [value]="materialOption" *ngFor="let materialOption of dimension.value.keys; let i = index">{{dimension.value.values[i]}}</mat-option>
+                        </mat-select>
+                </ng-container>
+                <ng-container *ngIf="dimension.value.type === 'NUMBER'">
+                    <mat-label>{{dimension.value.label}}</mat-label>
+                    <input matInput type="number" placeholder="Ex. 190" [(ngModel)]="dimension.value.value" [name]="dimension.key">
+                </ng-container>
+                <ng-container *ngIf="dimension.value.type === 'STRING'">
+                    <mat-label>{{dimension.value.label}}</mat-label>
+                    <input matInput type="string" placeholder="Ex. 190" [(ngModel)]="dimension.value.value" [name]="dimension.key">
+                </ng-container>
+            </mat-form-field>
+        </ng-container>
+    </form>
+</div>

@@ -1,0 +1,22 @@
+<div class="compatibility-component">
+    <div *ngIf="!compatibleDimensions">
+        Select a component to view compatibility
+    </div>
+    <div *ngIf="compatibleDimensions">
+        <div *ngIf="compatibleDimensions.length > 0">
+            Compatibility with other components
+            <div class="descriptions" *ngFor="let dimensions of compatibleDimensions">
+                <button (click)="goToComponent(dimensions)">Go</button>
+                <span *ngIf="dimensions.getStatus() === 'COMPATIBLE'" class="dot green"></span>
+                <span *ngIf="dimensions.getStatus() === 'NOT_COMPATIBLE'" class="dot red"></span>
+                <span *ngIf="dimensions.getStatus() === 'MISSING_CURRENT_DIMENSION'" class="dot yellow"></span>
+                <span *ngIf="dimensions.getStatus() === 'MISSING_MATCH_DIMENSION'" class="dot yellow"></span>
+                <span *ngIf="dimensions.getStatus() === 'MISSING_BOTH'" class="dot yellow"></span>
+                {{dimensions.statusString()}}
+            </div>
+        </div>
+        <div *ngIf="compatibleDimensions.length == 0">
+            This component doesn't rely on any other components
+        </div>
+    </div>
+</div>
