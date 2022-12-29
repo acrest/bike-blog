@@ -1,5 +1,4 @@
 <div class="bike-builder-page">
-    Still need to add ability to use components in garage and add to bike
     <div *ngIf="!bike && !loading" class="bike-start">
         <div>
             <div>What type of frame will you build from?</div>
@@ -21,11 +20,11 @@
     </div>
 
     <div *ngIf="bike" class="bike-options">
-        <button *ngIf="userId" (click)="saveCurrentBike()">Save Bike</button>
+        <!-- <button *ngIf="userId" (click)="saveCurrentBike()">Save Bike</button> -->
         <button (click)="clearCurrentBike()">Clear Bike</button>
-        Name:
+        <!-- Name:
         <input type="text" placeholder="Ex. Ripmo" [(ngModel)]="bike.name" name="bikeName">
-        <button (click)="uploadPhoto()">Upload Bike Photo</button>
+        <button (click)="uploadPhoto()">Upload Bike Photo</button> -->
     </div>
     <div *ngIf="bike" class="component-list-and-pic">
         <div class="components">
