@@ -21,6 +21,8 @@ export class CreatePostComponent implements OnInit {
 	public content: string;
 	public tags: string[] = [];
 	public possibleTagValues = Object.keys(BlogPostTag);
+	public linkURL: string = "";
+	public linkText: string = "";
 
   constructor(private postService: PostService) { }
 

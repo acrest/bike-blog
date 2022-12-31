@@ -15,6 +15,18 @@
 	<div *ngFor="let tag of possibleTagValues">
 		<input type="checkbox" (change)="tagUpdated(tag, $event)"> {{tag}}
 	</div>
+
+
+	Link: {{"\<a href=\""}}{{linkURL}}{{"\" target=\"_blank\">"}}{{this.linkText}}{{"\</a>"}}
+	<div>
+		URL
+	</div>
+	<input type="text" [(ngModel)]="linkURL">
+	<div>
+		Text
+	</div>
+	<input type="text" [(ngModel)]="linkText">
+	
 	
 	<div *ngIf="blogPhotos?.length > 0">Photos</div>
 	<div *ngFor="let photo of blogPhotos">
