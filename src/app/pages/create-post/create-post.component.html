@@ -3,19 +3,32 @@
 		Title
 	</div>
 	<input type="text" [(ngModel)]="title">
+
+	<br><br>
+
 	<div>
 		Sub-Title
 	</div>
 	<input type="text" [(ngModel)]="subTitle">
+
+	<br><br>
+
 	<div>
 		Content
 	</div>
 	<textarea [(ngModel)]="content"></textarea>
+
+	<br><br>
 	
 	<div *ngFor="let tag of possibleTagValues">
 		<input type="checkbox" (change)="tagUpdated(tag, $event)"> {{tag}}
 	</div>
 
+	<br><br>
+
+	New Line: {{"\<br>\<br>"}}
+
+	<br><br>
 
 	Link: {{"\<a href=\""}}{{linkURL}}{{"\" target=\"_blank\">"}}{{this.linkText}}{{"\</a>"}}
 	<div>
@@ -26,12 +39,15 @@
 		Text
 	</div>
 	<input type="text" [(ngModel)]="linkText">
-	
+
+	<br><br>
 	
 	<div *ngIf="blogPhotos?.length > 0">Photos</div>
 	<div *ngFor="let photo of blogPhotos">
 		{{photo.id}} : {{photo.title}}
 	</div>
+
+	<br><br>
 
 	<div *ngIf="blogVideos?.length > 0">Videos</div>
 	<div *ngFor="let video of blogVideos">

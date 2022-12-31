@@ -38,8 +38,6 @@ export class BikeBuilderComponent implements OnInit {
 
   constructor(private userService: UserService, private bikeService: BikeService,
     private elementRef: ElementRef) {
-		this.bike = new Bike("TEST", this.drivetrain, this.suspension);
-		this.bike.initializeComponents();
 	}
 
   ngOnInit(): void {
