@@ -13,7 +13,9 @@
 	<ng-container *ngIf="stravas?.length > 0">
 		<div id="{{strava.id}}" *ngFor="let strava of stravas" class="strava-activity">
 			(Strava embed currently not functioning go here to view <a href="https://www.strava.com/activities/{{strava.id}}/overview">Strava Link</a>)
-			<div class="strava-embed-placeholder" data-embed-type="activity" data-embed-id="7750115459"></div><script src="https://strava-embeds.com/embed.js"></script>
+			<div class="title">{{strava.title}}</div>
+			<div class="description">{{strava.description}}</div>
+			<!-- <div class="strava-embed-placeholder" data-embed-type="activity" data-embed-id="7750115459"></div><script src="https://strava-embeds.com/embed.js"></script> -->
 		</div>
 	</ng-container>
 	<ng-container *ngIf="photos?.length > 0">
