@@ -1,4 +1,4 @@
-import { Component, ElementRef, NgZone, OnInit, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit, Renderer2, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { YouTubePlayer } from '@angular/youtube-player';
@@ -21,7 +21,7 @@ export class BlogPostComponent implements OnInit {
 	@ViewChild('youtubeDiv', { static: false })
 	public el:ElementRef;
 
-	public constructor(private activatedRoute: ActivatedRoute, private ngZone: NgZone,
+	public constructor(private activatedRoute: ActivatedRoute, private _renderer2: Renderer2,
 		private postService: PostService, private domSanitizer: DomSanitizer) {
 	}
 
@@ -45,7 +45,7 @@ export class BlogPostComponent implements OnInit {
 				this.post.stravas.forEach((stravaString: string) => {
 					let strava: BlogStrava = JSON.parse(stravaString);
 					this.stravas.push(strava);
-					content = content.replace(strava.id, this.getYoutubeVideoEmbedded(strava));
+					content = content.replace(strava.id, this.getStravaEmbedded(strava));
 				});
 				this.sanitizedText = this.domSanitizer.bypassSecurityTrustHtml(content);
 				// this.el.nativeElement.innerHTML = content;
@@ -63,9 +63,15 @@ export class BlogPostComponent implements OnInit {
 			document.getElementById(video.id + "_placeholder").appendChild(ytElement);
 		});
 		this.stravas.forEach((strava: BlogStrava) => {
-			const stravaElement: HTMLElement = document.getElementById(strava.id)
+			const stravaElement: HTMLElement = document.getElementById(strava.id);
 			document.getElementById(strava.id + "_placeholder").appendChild(stravaElement);
 		});
+		if (this.stravas.length > 0)
+		{
+			let script = this._renderer2.createElement('script')
+			script.src = "https://strava-embeds.com/embed.js"
+			document.getElementById("strava-script").appendChild(script);
+		}
 	}
 
 	public getBlogPhotoElementString(photo: BlogPhoto): string {
@@ -73,12 +79,10 @@ export class BlogPostComponent implements OnInit {
 	}
 
 	public getYoutubeVideoEmbedded(video: BlogVideo): string {
-		// return `<pre><youtube-player [videoId]="'${video.id}'"></youtube-player></pre>`;
 		return `<div id="${video.id}_placeholder"></div>`;
 	}
 
 	public getStravaEmbedded(strava: BlogStrava): string {
-		// return `<pre><youtube-player [videoId]="'${video.id}'"></youtube-player></pre>`;
 		return `<div id="${strava.id}_placeholder"></div>`;
 	}
 }
