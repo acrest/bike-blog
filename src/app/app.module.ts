@@ -38,6 +38,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CompatibilityComponent } from './components/compatibility/compatibility.component';
 import { DimensionsComponent } from './components/dimensions/dimensions.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToolsComponent } from './pages/tools/tools.component';
+import { ComponentCheckerComponent } from './pages/component-checker/component-checker.component';
+import { ResourcesComponent } from './pages/resources/resources.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +60,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 	AttachStravaComponent,
  	BikeBuilderComponent,
 	CompatibilityComponent,
-	DimensionsComponent
+	DimensionsComponent,
+ ToolsComponent,
+ ComponentCheckerComponent,
+ ResourcesComponent
   ],
   imports: [
     BrowserModule,

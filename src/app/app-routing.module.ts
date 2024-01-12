@@ -8,6 +8,9 @@ import { CreateDealComponent } from './pages/create-deal/create-deal.component';
 import { CreatePostComponent } from './pages/create-post/create-post.component';
 import { DealsComponent } from './pages/deals/deals.component';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
+import { ToolsComponent } from './pages/tools/tools.component';
+import { ComponentCheckerComponent } from './pages/component-checker/component-checker.component';
+import { ResourcesComponent } from './pages/resources/resources.component';
 
 const routes: Routes = [
 	{path: "home", component: HomeComponent},
@@ -17,7 +20,10 @@ const routes: Routes = [
 	{path: "create-deal", component: CreateDealComponent},
 	{path: "post/:id", component: BlogPostComponent},
 	{path: "admin/sign-in", component: SignInComponent},
-	{path: "tools", component: BikeBuilderComponent},
+	{path: "tools", component: ToolsComponent},
+	{path: "resources", component: ResourcesComponent},
+	{path: "tools/bike-builder", component: BikeBuilderComponent},
+	{path: "tools/component-checker", component: ComponentCheckerComponent},
 	{path: "", component: BlogComponent}
 ];
 

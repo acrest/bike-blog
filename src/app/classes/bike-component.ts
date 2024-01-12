@@ -191,14 +191,18 @@ export class BikeComponent {
 
 export class CompatibleDimensions
 {
+	public currentComponent: ComponentType;
     public currentDimension: Dimension;
+	public matchComponent: ComponentType;
     public matchDimension: Dimension;
     public statusFunction: Function;
     public stringFunction: Function;
 
-    public constructor(currentDimension: Dimension, matchDimension: Dimension, statusFunction: Function, stringFunction: Function)
+    public constructor(currentComponent: ComponentType, currentDimension: Dimension, matchComponent: ComponentType, matchDimension: Dimension, statusFunction: Function, stringFunction: Function)
     {
+		this.currentComponent = currentComponent;
         this.currentDimension = currentDimension;
+		this.matchComponent = matchComponent;
         this.matchDimension = matchDimension;
         this.statusFunction = statusFunction;
         this.stringFunction = stringFunction;
@@ -380,39 +384,39 @@ export class Frame extends BikeComponent {
     {
         return [
             // Front wheel
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FRAME__FRONT_WHEEL_SIZE), bike.getDimension(DimensionKey.FRONT_TIRE__WHEEL_SIZE), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FRAME__FRONT_WHEEL_SIZE), bike.getDimension(DimensionKey.FRONT_WHEEL__WHEEL_SIZE), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FRAME__FRONT_WHEEL_SIZE), bike.getDimension(DimensionKey.TUBES__FRONT_WHEEL_SIZE), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FRAME__FRONT_WHEEL_SIZE), bike.getDimension(DimensionKey.FORK__FRONT_WHEEL_SIZE), null, null),
+            new CompatibleDimensions(ComponentType.FRAME, bike.getDimension(DimensionKey.FRAME__FRONT_WHEEL_SIZE), ComponentType.FRONT_TIRE, bike.getDimension(DimensionKey.FRONT_TIRE__WHEEL_SIZE), null, null),
+            new CompatibleDimensions(ComponentType.FRAME, bike.getDimension(DimensionKey.FRAME__FRONT_WHEEL_SIZE), ComponentType.FRONT_WHEEL, bike.getDimension(DimensionKey.FRONT_WHEEL__WHEEL_SIZE), null, null),
+            new CompatibleDimensions(ComponentType.FRAME, bike.getDimension(DimensionKey.FRAME__FRONT_WHEEL_SIZE), ComponentType.TUBES, bike.getDimension(DimensionKey.TUBES__FRONT_WHEEL_SIZE), null, null),
+            new CompatibleDimensions(ComponentType.FRAME, bike.getDimension(DimensionKey.FRAME__FRONT_WHEEL_SIZE), ComponentType.FORK, bike.getDimension(DimensionKey.FORK__FRONT_WHEEL_SIZE), null, null),
 
             // Rear wheel
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FRAME__REAR_WHEEL_SIZE), bike.getDimension(DimensionKey.REAR_TIRE__WHEEL_SIZE), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FRAME__REAR_WHEEL_SIZE), bike.getDimension(DimensionKey.REAR_WHEEL__WHEEL_SIZE), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FRAME__REAR_WHEEL_SIZE), bike.getDimension(DimensionKey.TUBES__REAR_WHEEL_SIZE), null, null),
+            new CompatibleDimensions(ComponentType.FRAME, bike.getDimension(DimensionKey.FRAME__REAR_WHEEL_SIZE), ComponentType.REAR_TIRE, bike.getDimension(DimensionKey.REAR_TIRE__WHEEL_SIZE), null, null),
+            new CompatibleDimensions(ComponentType.FRAME, bike.getDimension(DimensionKey.FRAME__REAR_WHEEL_SIZE), ComponentType.REAR_WHEEL, bike.getDimension(DimensionKey.REAR_WHEEL__WHEEL_SIZE), null, null),
+            new CompatibleDimensions(ComponentType.FRAME, bike.getDimension(DimensionKey.FRAME__REAR_WHEEL_SIZE), ComponentType.TUBES, bike.getDimension(DimensionKey.TUBES__REAR_WHEEL_SIZE), null, null),
 
             // Headset
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FRAME__UPPER_HEADSET_STANDARD), bike.getDimension(DimensionKey.HEADSET_TOP__STANDARD), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FRAME__LOWER_HEADSET_STANDARD), bike.getDimension(DimensionKey.HEADSET_BOTTOM__STANDARD), null, null),
+            new CompatibleDimensions(ComponentType.FRAME, bike.getDimension(DimensionKey.FRAME__UPPER_HEADSET_STANDARD), ComponentType.HEADSET_TOP, bike.getDimension(DimensionKey.HEADSET_TOP__STANDARD), null, null),
+            new CompatibleDimensions(ComponentType.FRAME, bike.getDimension(DimensionKey.FRAME__LOWER_HEADSET_STANDARD), ComponentType.HEADSET_BOTTOM, bike.getDimension(DimensionKey.HEADSET_BOTTOM__STANDARD), null, null),
 
             // Bottom Bracket
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FRAME__BB_TYPE), bike.getDimension(DimensionKey.BOTTOM_BRACKET__TYPE), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FRAME__BB_TYPE), bike.getDimension(DimensionKey.CRANKS__BOTTOM_BRACKET_TYPE), null, null),
+            new CompatibleDimensions(ComponentType.FRAME, bike.getDimension(DimensionKey.FRAME__BB_TYPE), ComponentType.BOTTOM_BRACKET, bike.getDimension(DimensionKey.BOTTOM_BRACKET__TYPE), null, null),
+            new CompatibleDimensions(ComponentType.FRAME, bike.getDimension(DimensionKey.FRAME__BB_TYPE), ComponentType.CRANKS, bike.getDimension(DimensionKey.CRANKS__BOTTOM_BRACKET_TYPE), null, null),
 
             // Rear Brake
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FRAME__REAR_BRAKE_MOUNT_TYPE), bike.getDimension(DimensionKey.REAR_BRAKE__MOUNT_TYPE), null, null),
+            new CompatibleDimensions(ComponentType.FRAME, bike.getDimension(DimensionKey.FRAME__REAR_BRAKE_MOUNT_TYPE), ComponentType.REAR_BRAKE, bike.getDimension(DimensionKey.REAR_BRAKE__MOUNT_TYPE), null, null),
 
             // Shock
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FRAME__EYE_TO_EYE), bike.getDimension(DimensionKey.SHOCK__EYE_TO_EYE), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FRAME__STROKE_LENGTH), bike.getDimension(DimensionKey.SHOCK__STROKE), null, null),
+            new CompatibleDimensions(ComponentType.FRAME, bike.getDimension(DimensionKey.FRAME__EYE_TO_EYE), ComponentType.SHOCK, bike.getDimension(DimensionKey.SHOCK__EYE_TO_EYE), null, null),
+            new CompatibleDimensions(ComponentType.FRAME, bike.getDimension(DimensionKey.FRAME__STROKE_LENGTH), ComponentType.SHOCK, bike.getDimension(DimensionKey.SHOCK__STROKE), null, null),
 
             // Axle
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FRAME__REAR_AXLE), bike.getDimension(DimensionKey.REAR_WHEEL__AXLE), null, null),
+            new CompatibleDimensions(ComponentType.FRAME, bike.getDimension(DimensionKey.FRAME__REAR_AXLE), ComponentType.REAR_WHEEL, bike.getDimension(DimensionKey.REAR_WHEEL__AXLE), null, null),
 
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FRAME__SEATPOST_DIAMETER), bike.getDimension(DimensionKey.SEATPOST__DIAMETER), null, null),
+            new CompatibleDimensions(ComponentType.FRAME, bike.getDimension(DimensionKey.FRAME__SEATPOST_DIAMETER), ComponentType.SEATPOST, bike.getDimension(DimensionKey.SEATPOST__DIAMETER), null, null),
 
             // Max Rotor
             // TODO: Need to add in potential brake mount adapters
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FRAME__REAR_MAX_ROTOR), bike.getDimension(DimensionKey.REAR_ROTOR__SIZE), null, null),
+            new CompatibleDimensions(ComponentType.FRAME, bike.getDimension(DimensionKey.FRAME__REAR_MAX_ROTOR), ComponentType.REAR_ROTOR, bike.getDimension(DimensionKey.REAR_ROTOR__SIZE), null, null),
 
 
             // special case for steerer tube
@@ -429,10 +433,10 @@ export class HeadsetTop extends BikeComponent {
     public override getCompatibleDimensions(bike: Bike): CompatibleDimensions[]
     {
         return [
-            new CompatibleDimensions(bike.getDimension(DimensionKey.HEADSET_TOP__STANDARD), bike.getDimension(DimensionKey.FRAME__UPPER_HEADSET_STANDARD), null, null),
+            new CompatibleDimensions(ComponentType.HEADSET_TOP, bike.getDimension(DimensionKey.HEADSET_TOP__STANDARD), ComponentType.FRAME, bike.getDimension(DimensionKey.FRAME__UPPER_HEADSET_STANDARD), null, null),
 
-            new CompatibleDimensions(bike.getDimension(DimensionKey.HEADSET_TOP__STEERER_TUBE_DIAMETER), bike.getDimension(DimensionKey.STEM__STEERER_DIAMETER), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.HEADSET_TOP__STEERER_TUBE_DIAMETER), bike.getDimension(DimensionKey.FORK__STEERER_TUBE_TOP_DIAMETER), null, null),
+            new CompatibleDimensions(ComponentType.HEADSET_TOP, bike.getDimension(DimensionKey.HEADSET_TOP__STEERER_TUBE_DIAMETER), ComponentType.STEM, bike.getDimension(DimensionKey.STEM__STEERER_DIAMETER), null, null),
+            new CompatibleDimensions(ComponentType.HEADSET_TOP, bike.getDimension(DimensionKey.HEADSET_TOP__STEERER_TUBE_DIAMETER), ComponentType.FORK, bike.getDimension(DimensionKey.FORK__STEERER_TUBE_TOP_DIAMETER), null, null),
         ];
     }
 }
@@ -446,9 +450,9 @@ export class HeadsetBottom extends BikeComponent {
     public override getCompatibleDimensions(bike: Bike): CompatibleDimensions[]
     {
         return [
-            new CompatibleDimensions(bike.getDimension(DimensionKey.HEADSET_BOTTOM__STANDARD), bike.getDimension(DimensionKey.FRAME__LOWER_HEADSET_STANDARD), null, null),
+            new CompatibleDimensions(ComponentType.HEADSET_BOTTOM, bike.getDimension(DimensionKey.HEADSET_BOTTOM__STANDARD), ComponentType.FRAME, bike.getDimension(DimensionKey.FRAME__LOWER_HEADSET_STANDARD), null, null),
 
-            new CompatibleDimensions(bike.getDimension(DimensionKey.HEADSET_BOTTOM__STEERER_TUBE_DIAMETER), bike.getDimension(DimensionKey.FORK__STEERER_TUBE_BOTTOM_DIAMETER), null, null),
+            new CompatibleDimensions(ComponentType.HEADSET_BOTTOM, bike.getDimension(DimensionKey.HEADSET_BOTTOM__STEERER_TUBE_DIAMETER), ComponentType.FORK, bike.getDimension(DimensionKey.FORK__STEERER_TUBE_BOTTOM_DIAMETER), null, null),
         ];
     }
 }
@@ -463,30 +467,30 @@ export class Fork extends BikeComponent {
     {
         return [
             // Wheel Size
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FORK__FRONT_WHEEL_SIZE), bike.getDimension(DimensionKey.FRONT_WHEEL__WHEEL_SIZE), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FORK__FRONT_WHEEL_SIZE), bike.getDimension(DimensionKey.FRONT_TIRE__WHEEL_SIZE), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FORK__FRONT_WHEEL_SIZE), bike.getDimension(DimensionKey.FRAME__FRONT_WHEEL_SIZE), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FORK__FRONT_WHEEL_SIZE), bike.getDimension(DimensionKey.TUBES__FRONT_WHEEL_SIZE), null, null),
+            new CompatibleDimensions(ComponentType.FORK, bike.getDimension(DimensionKey.FORK__FRONT_WHEEL_SIZE), ComponentType.FRONT_WHEEL, bike.getDimension(DimensionKey.FRONT_WHEEL__WHEEL_SIZE), null, null),
+            // new CompatibleDimensions(ComponentType.FORK, bike.getDimension(DimensionKey.FORK__FRONT_WHEEL_SIZE), ComponentType.FRONT_TIRE, bike.getDimension(DimensionKey.FRONT_TIRE__WHEEL_SIZE), null, null),
+            new CompatibleDimensions(ComponentType.FORK, bike.getDimension(DimensionKey.FORK__FRONT_WHEEL_SIZE), ComponentType.FRAME, bike.getDimension(DimensionKey.FRAME__FRONT_WHEEL_SIZE), null, null),
+            // new CompatibleDimensions(ComponentType.FORK, bike.getDimension(DimensionKey.FORK__FRONT_WHEEL_SIZE), ComponentType.TUBES, bike.getDimension(DimensionKey.TUBES__FRONT_WHEEL_SIZE), null, null),
 
             // Brake Mount Type
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FORK__BRAKE_MOUNT_TYPE), bike.getDimension(DimensionKey.FRONT_BRAKE__MOUNT_TYPE), null, null),
+            new CompatibleDimensions(ComponentType.FORK, bike.getDimension(DimensionKey.FORK__BRAKE_MOUNT_TYPE), ComponentType.FRONT_BRAKE, bike.getDimension(DimensionKey.FRONT_BRAKE__MOUNT_TYPE), null, null),
 
             // Steerer Tube Top Diameter
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FORK__STEERER_TUBE_TOP_DIAMETER), bike.getDimension(DimensionKey.STEM__STEERER_DIAMETER), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FORK__STEERER_TUBE_TOP_DIAMETER), bike.getDimension(DimensionKey.HEADSET_TOP__STEERER_TUBE_DIAMETER), null, null),
+            new CompatibleDimensions(ComponentType.FORK, bike.getDimension(DimensionKey.FORK__STEERER_TUBE_TOP_DIAMETER), ComponentType.STEM, bike.getDimension(DimensionKey.STEM__STEERER_DIAMETER), null, null),
+            new CompatibleDimensions(ComponentType.FORK, bike.getDimension(DimensionKey.FORK__STEERER_TUBE_TOP_DIAMETER), ComponentType.HEADSET_TOP, bike.getDimension(DimensionKey.HEADSET_TOP__STEERER_TUBE_DIAMETER), null, null),
 
             // Steerer Tube Bottom Diameter
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FORK__STEERER_TUBE_BOTTOM_DIAMETER), bike.getDimension(DimensionKey.HEADSET_BOTTOM__STEERER_TUBE_DIAMETER), null, null),
+            new CompatibleDimensions(ComponentType.FORK, bike.getDimension(DimensionKey.FORK__STEERER_TUBE_BOTTOM_DIAMETER), ComponentType.HEADSET_BOTTOM, bike.getDimension(DimensionKey.HEADSET_BOTTOM__STEERER_TUBE_DIAMETER), null, null),
 
             // Steerer Tube Length
             // Special case this
 
             // Axle
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FORK__AXLE), bike.getDimension(DimensionKey.FRONT_WHEEL__AXLE), null, null),
+            new CompatibleDimensions(ComponentType.FORK, bike.getDimension(DimensionKey.FORK__AXLE), ComponentType.FRONT_WHEEL, bike.getDimension(DimensionKey.FRONT_WHEEL__AXLE), null, null),
 
             // Rotor
             // TODO: Need to add in potential brake mount adapters
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FRONT_ROTOR__SIZE), bike.getDimension(DimensionKey.FORK__ROTOR_MAX_SIZE), null, null),
+            new CompatibleDimensions(ComponentType.FORK, bike.getDimension(DimensionKey.FORK__ROTOR_MAX_SIZE), ComponentType.FRONT_ROTOR, bike.getDimension(DimensionKey.FRONT_ROTOR__SIZE), null, null),
         ];
     }
 }
@@ -500,8 +504,8 @@ export class Shock extends BikeComponent {
     public override getCompatibleDimensions(bike: Bike): CompatibleDimensions[]
     {
         return [
-            new CompatibleDimensions(bike.getDimension(DimensionKey.SHOCK__EYE_TO_EYE), bike.getDimension(DimensionKey.FRAME__EYE_TO_EYE), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.SHOCK__STROKE), bike.getDimension(DimensionKey.FRAME__STROKE_LENGTH), null, null),
+            new CompatibleDimensions(ComponentType.SHOCK, bike.getDimension(DimensionKey.SHOCK__EYE_TO_EYE), ComponentType.FRAME, bike.getDimension(DimensionKey.FRAME__EYE_TO_EYE), null, null),
+            new CompatibleDimensions(ComponentType.SHOCK, bike.getDimension(DimensionKey.SHOCK__STROKE), ComponentType.FRAME, bike.getDimension(DimensionKey.FRAME__STROKE_LENGTH), null, null),
         ];
     }
 }
@@ -516,13 +520,13 @@ export class Seatpost extends BikeComponent {
     {
         return [
             // Frame
-            new CompatibleDimensions(bike.getDimension(DimensionKey.SEATPOST__DIAMETER), bike.getDimension(DimensionKey.FRAME__SEATPOST_DIAMETER), null, null),
+            new CompatibleDimensions(ComponentType.SEATPOST, bike.getDimension(DimensionKey.SEATPOST__DIAMETER), ComponentType.FRAME, bike.getDimension(DimensionKey.FRAME__SEATPOST_DIAMETER), null, null),
 
             // TODO: can force what gets put in the array depending if it is dropper or not
             // Lever
-            new CompatibleDimensions(bike.getDimension(DimensionKey.SEATPOST__IS_DROPPER), bike.getDimension(DimensionKey.SEATPOST_LEVER__IS_DROPPER), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.SEATPOST__IS_ELECTRIC), bike.getDimension(DimensionKey.SEATPOST_LEVER__IS_ELECTRIC), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.SEATPOST__CABLE_END_TYPE), bike.getDimension(DimensionKey.SEATPOST_LEVER__CABLE_END_TYPE), null, null),
+            new CompatibleDimensions(ComponentType.SEATPOST, bike.getDimension(DimensionKey.SEATPOST__IS_DROPPER), ComponentType.SEATPOST, bike.getDimension(DimensionKey.SEATPOST_LEVER__IS_DROPPER), null, null),
+            new CompatibleDimensions(ComponentType.SEATPOST, bike.getDimension(DimensionKey.SEATPOST__IS_ELECTRIC), ComponentType.SEATPOST, bike.getDimension(DimensionKey.SEATPOST_LEVER__IS_ELECTRIC), null, null),
+            new CompatibleDimensions(ComponentType.SEATPOST, bike.getDimension(DimensionKey.SEATPOST__CABLE_END_TYPE), ComponentType.SEATPOST, bike.getDimension(DimensionKey.SEATPOST_LEVER__CABLE_END_TYPE), null, null),
             
             // TODO: Max insertion needs work
         ];
@@ -540,9 +544,9 @@ export class SeatpostLever extends BikeComponent {
     {
         // TODO: can force what gets put in the array depending if it is dropper or not
         return [
-            new CompatibleDimensions(bike.getDimension(DimensionKey.SEATPOST_LEVER__IS_DROPPER), bike.getDimension(DimensionKey.SEATPOST__IS_DROPPER), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.SEATPOST_LEVER__IS_ELECTRIC), bike.getDimension(DimensionKey.SEATPOST__IS_ELECTRIC), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.SEATPOST_LEVER__CABLE_END_TYPE), bike.getDimension(DimensionKey.SEATPOST__CABLE_END_TYPE), null, null),
+            new CompatibleDimensions(ComponentType.SEATPOST, bike.getDimension(DimensionKey.SEATPOST_LEVER__IS_DROPPER), ComponentType.SEATPOST, bike.getDimension(DimensionKey.SEATPOST__IS_DROPPER), null, null),
+            new CompatibleDimensions(ComponentType.SEATPOST, bike.getDimension(DimensionKey.SEATPOST_LEVER__IS_ELECTRIC), ComponentType.SEATPOST, bike.getDimension(DimensionKey.SEATPOST__IS_ELECTRIC), null, null),
+            new CompatibleDimensions(ComponentType.SEATPOST, bike.getDimension(DimensionKey.SEATPOST_LEVER__CABLE_END_TYPE), ComponentType.SEATPOST, bike.getDimension(DimensionKey.SEATPOST__CABLE_END_TYPE), null, null),
         ];
     }
 }
@@ -569,15 +573,15 @@ export class Cranks extends BikeComponent {
     public override getCompatibleDimensions(bike: Bike): CompatibleDimensions[]
     {
         return [
-            new CompatibleDimensions(bike.getDimension(DimensionKey.CRANKS__BOTTOM_BRACKET_TYPE), bike.getDimension(DimensionKey.BOTTOM_BRACKET__TYPE), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.CRANKS__BOTTOM_BRACKET_TYPE), bike.getDimension(DimensionKey.FRAME__BB_TYPE), null, null),
+            new CompatibleDimensions(ComponentType.CRANKS, bike.getDimension(DimensionKey.CRANKS__BOTTOM_BRACKET_TYPE), ComponentType.BOTTOM_BRACKET, bike.getDimension(DimensionKey.BOTTOM_BRACKET__TYPE), null, null),
+            new CompatibleDimensions(ComponentType.CRANKS, bike.getDimension(DimensionKey.CRANKS__BOTTOM_BRACKET_TYPE), ComponentType.FRAME, bike.getDimension(DimensionKey.FRAME__BB_TYPE), null, null),
 
-            new CompatibleDimensions(bike.getDimension(DimensionKey.CRANKS__SPINDLE_DIAMETER), bike.getDimension(DimensionKey.BOTTOM_BRACKET__SPINDLE_DIAMETER), null, null),
+            new CompatibleDimensions(ComponentType.CRANKS, bike.getDimension(DimensionKey.CRANKS__SPINDLE_DIAMETER), ComponentType.BOTTOM_BRACKET, bike.getDimension(DimensionKey.BOTTOM_BRACKET__SPINDLE_DIAMETER), null, null),
 
-            new CompatibleDimensions(bike.getDimension(DimensionKey.CRANKS__BOLT_TYPE), bike.getDimension(DimensionKey.CHAINRING__BOLT_TYPE), null, null),
+            new CompatibleDimensions(ComponentType.CRANKS, bike.getDimension(DimensionKey.CRANKS__BOLT_TYPE), ComponentType.CHAINRING, bike.getDimension(DimensionKey.CHAINRING__BOLT_TYPE), null, null),
 
             // TODO: need to figure out drivetrain with ring count - Probably need to instantiate different object for 2x and 3x
-            // new CompatibleDimensions(bike.getDimension(DimensionKey.CRANKS__RING_COUNT), bike.getDimension(DimensionKey), null, null),
+            // new CompatibleDimensions(ComponentType.CRANKS, bike.getDimension(DimensionKey.CRANKS__RING_COUNT), bike.getDimension(DimensionKey), null, null),
         ];
     }
 }
@@ -592,7 +596,7 @@ export class Chainring extends BikeComponent {
     public override getCompatibleDimensions(bike: Bike): CompatibleDimensions[]
     {
         return [
-            new CompatibleDimensions(bike.getDimension(DimensionKey.CHAINRING__BOLT_TYPE), bike.getDimension(DimensionKey.CRANKS__BOLT_TYPE), null, null),
+            new CompatibleDimensions(ComponentType.CHAINRING, bike.getDimension(DimensionKey.CHAINRING__BOLT_TYPE), ComponentType.CRANKS, bike.getDimension(DimensionKey.CRANKS__BOLT_TYPE), null, null),
         ];
     }
 }
@@ -606,11 +610,11 @@ export class Shifter extends BikeComponent {
     public override getCompatibleDimensions(bike: Bike): CompatibleDimensions[]
     {
         return [
-            new CompatibleDimensions(bike.getDimension(DimensionKey.SHIFTER__SPEEDS), bike.getDimension(DimensionKey.CHAIN__SPEEDS), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.SHIFTER__SPEEDS), bike.getDimension(DimensionKey.CASSETTE__SPEEDS), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.SHIFTER__SPEEDS), bike.getDimension(DimensionKey.DERAILLEUR__SPEEDS), null, null),
+            new CompatibleDimensions(ComponentType.SHIFTER, bike.getDimension(DimensionKey.SHIFTER__SPEEDS), ComponentType.CHAIN, bike.getDimension(DimensionKey.CHAIN__SPEEDS), null, null),
+            new CompatibleDimensions(ComponentType.SHIFTER, bike.getDimension(DimensionKey.SHIFTER__SPEEDS), ComponentType.CASSETTE, bike.getDimension(DimensionKey.CASSETTE__SPEEDS), null, null),
+            new CompatibleDimensions(ComponentType.SHIFTER, bike.getDimension(DimensionKey.SHIFTER__SPEEDS), ComponentType.DERAILLEUR, bike.getDimension(DimensionKey.DERAILLEUR__SPEEDS), null, null),
 
-            new CompatibleDimensions(bike.getDimension(DimensionKey.SHIFTER__IS_ELECTRIC), bike.getDimension(DimensionKey.DERAILLEUR__IS_ELECTRIC), null, null),
+            new CompatibleDimensions(ComponentType.SHIFTER, bike.getDimension(DimensionKey.SHIFTER__IS_ELECTRIC), ComponentType.DERAILLEUR, bike.getDimension(DimensionKey.DERAILLEUR__IS_ELECTRIC), null, null),
         ];
     }
 }
@@ -638,13 +642,13 @@ export class Derailleur extends BikeComponent {
     public override getCompatibleDimensions(bike: Bike): CompatibleDimensions[]
     {
         return [
-            new CompatibleDimensions(bike.getDimension(DimensionKey.DERAILLEUR__SPEEDS), bike.getDimension(DimensionKey.CHAIN__SPEEDS), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.DERAILLEUR__SPEEDS), bike.getDimension(DimensionKey.CASSETTE__SPEEDS), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.DERAILLEUR__SPEEDS), bike.getDimension(DimensionKey.SHIFTER__SPEEDS), null, null),
+            new CompatibleDimensions(ComponentType.DERAILLEUR, bike.getDimension(DimensionKey.DERAILLEUR__SPEEDS), ComponentType.CHAIN, bike.getDimension(DimensionKey.CHAIN__SPEEDS), null, null),
+            new CompatibleDimensions(ComponentType.DERAILLEUR, bike.getDimension(DimensionKey.DERAILLEUR__SPEEDS), ComponentType.CASSETTE, bike.getDimension(DimensionKey.CASSETTE__SPEEDS), null, null),
+            new CompatibleDimensions(ComponentType.DERAILLEUR, bike.getDimension(DimensionKey.DERAILLEUR__SPEEDS), ComponentType.SHIFTER, bike.getDimension(DimensionKey.SHIFTER__SPEEDS), null, null),
 
-            new CompatibleDimensions(bike.getDimension(DimensionKey.DERAILLEUR__IS_ELECTRIC), bike.getDimension(DimensionKey.SHIFTER__IS_ELECTRIC), null, null),
+            new CompatibleDimensions(ComponentType.DERAILLEUR, bike.getDimension(DimensionKey.DERAILLEUR__IS_ELECTRIC), ComponentType.SHIFTER, bike.getDimension(DimensionKey.SHIFTER__IS_ELECTRIC), null, null),
 
-            new CompatibleDimensions(bike.getDimension(DimensionKey.DERAILLEUR__COVERAGE_PERCENT), bike.getDimension(DimensionKey.CASSETTE__COVERAGE_PERCENT), null, null),
+            new CompatibleDimensions(ComponentType.DERAILLEUR, bike.getDimension(DimensionKey.DERAILLEUR__COVERAGE_PERCENT), ComponentType.CASSETTE, bike.getDimension(DimensionKey.CASSETTE__COVERAGE_PERCENT), null, null),
         ];
     }
 }
@@ -672,11 +676,11 @@ export class Cassette extends BikeComponent {
     public override getCompatibleDimensions(bike: Bike): CompatibleDimensions[]
     {
         return [
-            new CompatibleDimensions(bike.getDimension(DimensionKey.CASSETTE__SPEEDS), bike.getDimension(DimensionKey.CHAIN__SPEEDS), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.CASSETTE__SPEEDS), bike.getDimension(DimensionKey.DERAILLEUR__SPEEDS), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.CASSETTE__SPEEDS), bike.getDimension(DimensionKey.SHIFTER__SPEEDS), null, null),
+            new CompatibleDimensions(ComponentType.CASSETTE, bike.getDimension(DimensionKey.CASSETTE__SPEEDS), ComponentType.CHAIN, bike.getDimension(DimensionKey.CHAIN__SPEEDS), null, null),
+            new CompatibleDimensions(ComponentType.CASSETTE, bike.getDimension(DimensionKey.CASSETTE__SPEEDS), ComponentType.DERAILLEUR, bike.getDimension(DimensionKey.DERAILLEUR__SPEEDS), null, null),
+            new CompatibleDimensions(ComponentType.CASSETTE, bike.getDimension(DimensionKey.CASSETTE__SPEEDS), ComponentType.SHIFTER, bike.getDimension(DimensionKey.SHIFTER__SPEEDS), null, null),
 
-            new CompatibleDimensions(bike.getDimension(DimensionKey.CASSETTE__COVERAGE_PERCENT), bike.getDimension(DimensionKey.DERAILLEUR__COVERAGE_PERCENT), null, null),
+            new CompatibleDimensions(ComponentType.CASSETTE, bike.getDimension(DimensionKey.CASSETTE__COVERAGE_PERCENT), ComponentType.DERAILLEUR, bike.getDimension(DimensionKey.DERAILLEUR__COVERAGE_PERCENT), null, null),
         ];
     }
 }
@@ -690,9 +694,9 @@ export class Chain extends BikeComponent {
     public override getCompatibleDimensions(bike: Bike): CompatibleDimensions[]
     {
         return [
-            new CompatibleDimensions(bike.getDimension(DimensionKey.CHAIN__SPEEDS), bike.getDimension(DimensionKey.DERAILLEUR__SPEEDS), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.CHAIN__SPEEDS), bike.getDimension(DimensionKey.CASSETTE__SPEEDS), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.CHAIN__SPEEDS), bike.getDimension(DimensionKey.SHIFTER__SPEEDS), null, null),
+            new CompatibleDimensions(ComponentType.CHAIN, bike.getDimension(DimensionKey.CHAIN__SPEEDS), ComponentType.DERAILLEUR, bike.getDimension(DimensionKey.DERAILLEUR__SPEEDS), null, null),
+            new CompatibleDimensions(ComponentType.CHAIN, bike.getDimension(DimensionKey.CHAIN__SPEEDS), ComponentType.CASSETTE, bike.getDimension(DimensionKey.CASSETTE__SPEEDS), null, null),
+            new CompatibleDimensions(ComponentType.CHAIN, bike.getDimension(DimensionKey.CHAIN__SPEEDS), ComponentType.SHIFTER, bike.getDimension(DimensionKey.SHIFTER__SPEEDS), null, null),
         ];
     }
 }
@@ -706,8 +710,8 @@ export class BottomBracket extends BikeComponent {
     public override getCompatibleDimensions(bike: Bike): CompatibleDimensions[]
     {
         return [
-            new CompatibleDimensions(bike.getDimension(DimensionKey.BOTTOM_BRACKET__TYPE), bike.getDimension(DimensionKey.FRAME__BB_TYPE), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.BOTTOM_BRACKET__TYPE), bike.getDimension(DimensionKey.CRANKS__BOTTOM_BRACKET_TYPE), null, null),
+            new CompatibleDimensions(ComponentType.BOTTOM_BRACKET, bike.getDimension(DimensionKey.BOTTOM_BRACKET__TYPE), ComponentType.FRAME, bike.getDimension(DimensionKey.FRAME__BB_TYPE), null, null),
+            new CompatibleDimensions(ComponentType.BOTTOM_BRACKET, bike.getDimension(DimensionKey.BOTTOM_BRACKET__TYPE), ComponentType.CRANKS, bike.getDimension(DimensionKey.CRANKS__BOTTOM_BRACKET_TYPE), null, null),
         ];
     }
 }
@@ -721,7 +725,7 @@ export class FrontBrake extends BikeComponent {
     public override getCompatibleDimensions(bike: Bike): CompatibleDimensions[]
     {
         return [
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FRONT_BRAKE__MOUNT_TYPE), bike.getDimension(DimensionKey.FORK__BRAKE_MOUNT_TYPE), null, null),
+            new CompatibleDimensions(ComponentType.FRONT_BRAKE, bike.getDimension(DimensionKey.FRONT_BRAKE__MOUNT_TYPE), ComponentType.FORK, bike.getDimension(DimensionKey.FORK__BRAKE_MOUNT_TYPE), null, null),
         ];
     }
 }
@@ -735,7 +739,7 @@ export class RearBrake extends BikeComponent {
     public override getCompatibleDimensions(bike: Bike): CompatibleDimensions[]
     {
         return [
-            new CompatibleDimensions(bike.getDimension(DimensionKey.REAR_BRAKE__MOUNT_TYPE), bike.getDimension(DimensionKey.FRAME__REAR_BRAKE_MOUNT_TYPE), null, null),
+            new CompatibleDimensions(ComponentType.REAR_BRAKE, bike.getDimension(DimensionKey.REAR_BRAKE__MOUNT_TYPE), ComponentType.FRAME, bike.getDimension(DimensionKey.FRAME__REAR_BRAKE_MOUNT_TYPE), null, null),
         ];
     }
 }
@@ -750,7 +754,7 @@ export class FrontRotor extends BikeComponent {
     {
         return [
             // TODO: Need to add in potential brake mount adapters
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FRONT_ROTOR__SIZE), bike.getDimension(DimensionKey.FORK__ROTOR_MAX_SIZE), null, null),
+            new CompatibleDimensions(ComponentType.FRONT_ROTOR, bike.getDimension(DimensionKey.FRONT_ROTOR__SIZE), ComponentType.FORK, bike.getDimension(DimensionKey.FORK__ROTOR_MAX_SIZE), null, null),
         ];
     }
 }
@@ -765,7 +769,7 @@ export class RearRotor extends BikeComponent {
     {
         return [
             // TODO: Need to add in potential brake mount adapters
-            new CompatibleDimensions(bike.getDimension(DimensionKey.REAR_ROTOR__SIZE), bike.getDimension(DimensionKey.FRAME__REAR_MAX_ROTOR), null, null),
+            new CompatibleDimensions(ComponentType.REAR_ROTOR, bike.getDimension(DimensionKey.REAR_ROTOR__SIZE), ComponentType.FRAME, bike.getDimension(DimensionKey.FRAME__REAR_MAX_ROTOR), null, null),
         ];
     }
 }
@@ -791,10 +795,10 @@ export class FrontTire extends BikeComponent {
     public override getCompatibleDimensions(bike: Bike): CompatibleDimensions[]
     {
         return [
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FRONT_TIRE__WHEEL_SIZE), bike.getDimension(DimensionKey.FORK__FRONT_WHEEL_SIZE), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FRONT_TIRE__WHEEL_SIZE), bike.getDimension(DimensionKey.FRONT_WHEEL__WHEEL_SIZE), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FRONT_TIRE__WHEEL_SIZE), bike.getDimension(DimensionKey.FRAME__FRONT_WHEEL_SIZE), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FRONT_TIRE__WHEEL_SIZE), bike.getDimension(DimensionKey.TUBES__FRONT_WHEEL_SIZE), null, null),
+            new CompatibleDimensions(ComponentType.FRONT_TIRE, bike.getDimension(DimensionKey.FRONT_TIRE__WHEEL_SIZE), ComponentType.FORK, bike.getDimension(DimensionKey.FORK__FRONT_WHEEL_SIZE), null, null),
+            new CompatibleDimensions(ComponentType.FRONT_TIRE, bike.getDimension(DimensionKey.FRONT_TIRE__WHEEL_SIZE), ComponentType.FRONT_WHEEL, bike.getDimension(DimensionKey.FRONT_WHEEL__WHEEL_SIZE), null, null),
+            new CompatibleDimensions(ComponentType.FRONT_TIRE, bike.getDimension(DimensionKey.FRONT_TIRE__WHEEL_SIZE), ComponentType.FRAME, bike.getDimension(DimensionKey.FRAME__FRONT_WHEEL_SIZE), null, null),
+            new CompatibleDimensions(ComponentType.FRONT_TIRE, bike.getDimension(DimensionKey.FRONT_TIRE__WHEEL_SIZE), ComponentType.TUBES, bike.getDimension(DimensionKey.TUBES__FRONT_WHEEL_SIZE), null, null),
         ];
     }
 }
@@ -808,9 +812,9 @@ export class RearTire extends BikeComponent {
     public override getCompatibleDimensions(bike: Bike): CompatibleDimensions[]
     {
         return [
-            new CompatibleDimensions(bike.getDimension(DimensionKey.REAR_TIRE__WHEEL_SIZE), bike.getDimension(DimensionKey.FRAME__REAR_WHEEL_SIZE), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.REAR_TIRE__WHEEL_SIZE), bike.getDimension(DimensionKey.REAR_WHEEL__WHEEL_SIZE), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.REAR_TIRE__WHEEL_SIZE), bike.getDimension(DimensionKey.TUBES__REAR_WHEEL_SIZE), null, null),
+            new CompatibleDimensions(ComponentType.REAR_TIRE, bike.getDimension(DimensionKey.REAR_TIRE__WHEEL_SIZE), ComponentType.FRAME, bike.getDimension(DimensionKey.FRAME__REAR_WHEEL_SIZE), null, null),
+            new CompatibleDimensions(ComponentType.REAR_TIRE, bike.getDimension(DimensionKey.REAR_TIRE__WHEEL_SIZE), ComponentType.REAR_WHEEL, bike.getDimension(DimensionKey.REAR_WHEEL__WHEEL_SIZE), null, null),
+            new CompatibleDimensions(ComponentType.REAR_TIRE, bike.getDimension(DimensionKey.REAR_TIRE__WHEEL_SIZE), ComponentType.TUBES, bike.getDimension(DimensionKey.TUBES__REAR_WHEEL_SIZE), null, null),
         ];
     }
 }
@@ -824,14 +828,14 @@ export class FrontWheel extends BikeComponent {
     public override getCompatibleDimensions(bike: Bike): CompatibleDimensions[]
     {
         return [
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FRONT_WHEEL__WHEEL_SIZE), bike.getDimension(DimensionKey.FORK__FRONT_WHEEL_SIZE), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FRONT_WHEEL__WHEEL_SIZE), bike.getDimension(DimensionKey.FRONT_TIRE__WHEEL_SIZE), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FRONT_WHEEL__WHEEL_SIZE), bike.getDimension(DimensionKey.FRAME__FRONT_WHEEL_SIZE), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FRONT_WHEEL__WHEEL_SIZE), bike.getDimension(DimensionKey.TUBES__FRONT_WHEEL_SIZE), null, null),
+            new CompatibleDimensions(ComponentType.FRONT_WHEEL, bike.getDimension(DimensionKey.FRONT_WHEEL__WHEEL_SIZE), ComponentType.FORK, bike.getDimension(DimensionKey.FORK__FRONT_WHEEL_SIZE), null, null),
+            new CompatibleDimensions(ComponentType.FRONT_WHEEL, bike.getDimension(DimensionKey.FRONT_WHEEL__WHEEL_SIZE), ComponentType.FRONT_TIRE, bike.getDimension(DimensionKey.FRONT_TIRE__WHEEL_SIZE), null, null),
+            new CompatibleDimensions(ComponentType.FRONT_WHEEL, bike.getDimension(DimensionKey.FRONT_WHEEL__WHEEL_SIZE), ComponentType.FRAME, bike.getDimension(DimensionKey.FRAME__FRONT_WHEEL_SIZE), null, null),
+            new CompatibleDimensions(ComponentType.FRONT_WHEEL, bike.getDimension(DimensionKey.FRONT_WHEEL__WHEEL_SIZE), ComponentType.TUBES, bike.getDimension(DimensionKey.TUBES__FRONT_WHEEL_SIZE), null, null),
 
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FRONT_WHEEL__MOUNT_TYPE), bike.getDimension(DimensionKey.FRONT_TIRE__MOUNT_TYPE), null, null),
+            new CompatibleDimensions(ComponentType.FRONT_WHEEL, bike.getDimension(DimensionKey.FRONT_WHEEL__MOUNT_TYPE), ComponentType.FRONT_TIRE, bike.getDimension(DimensionKey.FRONT_TIRE__MOUNT_TYPE), null, null),
 
-            new CompatibleDimensions(bike.getDimension(DimensionKey.FRONT_WHEEL__AXLE), bike.getDimension(DimensionKey.FORK__AXLE), null, null),
+            new CompatibleDimensions(ComponentType.FRONT_WHEEL, bike.getDimension(DimensionKey.FRONT_WHEEL__AXLE), ComponentType.FORK, bike.getDimension(DimensionKey.FORK__AXLE), null, null),
 
             //TODO: brake type (disk rim)
         ];
@@ -847,13 +851,13 @@ export class RearWheel extends BikeComponent {
     public override getCompatibleDimensions(bike: Bike): CompatibleDimensions[]
     {
         return [
-            new CompatibleDimensions(bike.getDimension(DimensionKey.REAR_WHEEL__WHEEL_SIZE), bike.getDimension(DimensionKey.FRAME__REAR_WHEEL_SIZE), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.REAR_WHEEL__WHEEL_SIZE), bike.getDimension(DimensionKey.REAR_TIRE__WHEEL_SIZE), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.REAR_WHEEL__WHEEL_SIZE), bike.getDimension(DimensionKey.TUBES__REAR_WHEEL_SIZE), null, null),
+            new CompatibleDimensions(ComponentType.REAR_WHEEL, bike.getDimension(DimensionKey.REAR_WHEEL__WHEEL_SIZE), ComponentType.FRAME, bike.getDimension(DimensionKey.FRAME__REAR_WHEEL_SIZE), null, null),
+            new CompatibleDimensions(ComponentType.REAR_WHEEL, bike.getDimension(DimensionKey.REAR_WHEEL__WHEEL_SIZE), ComponentType.REAR_TIRE, bike.getDimension(DimensionKey.REAR_TIRE__WHEEL_SIZE), null, null),
+            new CompatibleDimensions(ComponentType.REAR_WHEEL, bike.getDimension(DimensionKey.REAR_WHEEL__WHEEL_SIZE), ComponentType.TUBES, bike.getDimension(DimensionKey.TUBES__REAR_WHEEL_SIZE), null, null),
 
-            new CompatibleDimensions(bike.getDimension(DimensionKey.REAR_WHEEL__MOUNT_TYPE), bike.getDimension(DimensionKey.REAR_TIRE__MOUNT_TYPE), null, null),
+            new CompatibleDimensions(ComponentType.REAR_WHEEL, bike.getDimension(DimensionKey.REAR_WHEEL__MOUNT_TYPE), ComponentType.REAR_TIRE, bike.getDimension(DimensionKey.REAR_TIRE__MOUNT_TYPE), null, null),
 
-            new CompatibleDimensions(bike.getDimension(DimensionKey.REAR_WHEEL__AXLE), bike.getDimension(DimensionKey.FRAME__REAR_AXLE), null, null),
+            new CompatibleDimensions(ComponentType.REAR_WHEEL, bike.getDimension(DimensionKey.REAR_WHEEL__AXLE), ComponentType.FRAME, bike.getDimension(DimensionKey.FRAME__REAR_AXLE), null, null),
 
             //TODO: brake type (disk rim)
         ];
@@ -919,14 +923,14 @@ export class Tubes extends BikeComponent {
     public override getCompatibleDimensions(bike: Bike): CompatibleDimensions[]
     {
         return [
-            new CompatibleDimensions(bike.getDimension(DimensionKey.TUBES__FRONT_WHEEL_SIZE), bike.getDimension(DimensionKey.FORK__FRONT_WHEEL_SIZE), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.TUBES__FRONT_WHEEL_SIZE), bike.getDimension(DimensionKey.FRONT_TIRE__WHEEL_SIZE), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.TUBES__FRONT_WHEEL_SIZE), bike.getDimension(DimensionKey.FRAME__FRONT_WHEEL_SIZE), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.TUBES__FRONT_WHEEL_SIZE), bike.getDimension(DimensionKey.FRONT_WHEEL__WHEEL_SIZE), null, null),
+            new CompatibleDimensions(ComponentType.TUBES, bike.getDimension(DimensionKey.TUBES__FRONT_WHEEL_SIZE), ComponentType.FORK, bike.getDimension(DimensionKey.FORK__FRONT_WHEEL_SIZE), null, null),
+            new CompatibleDimensions(ComponentType.TUBES, bike.getDimension(DimensionKey.TUBES__FRONT_WHEEL_SIZE), ComponentType.FRONT_TIRE, bike.getDimension(DimensionKey.FRONT_TIRE__WHEEL_SIZE), null, null),
+            new CompatibleDimensions(ComponentType.TUBES, bike.getDimension(DimensionKey.TUBES__FRONT_WHEEL_SIZE), ComponentType.FRAME, bike.getDimension(DimensionKey.FRAME__FRONT_WHEEL_SIZE), null, null),
+            new CompatibleDimensions(ComponentType.TUBES, bike.getDimension(DimensionKey.TUBES__FRONT_WHEEL_SIZE), ComponentType.FRONT_WHEEL, bike.getDimension(DimensionKey.FRONT_WHEEL__WHEEL_SIZE), null, null),
 
-            new CompatibleDimensions(bike.getDimension(DimensionKey.TUBES__REAR_WHEEL_SIZE), bike.getDimension(DimensionKey.FRAME__REAR_WHEEL_SIZE), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.TUBES__REAR_WHEEL_SIZE), bike.getDimension(DimensionKey.REAR_TIRE__WHEEL_SIZE), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.TUBES__REAR_WHEEL_SIZE), bike.getDimension(DimensionKey.REAR_WHEEL__WHEEL_SIZE), null, null),
+            new CompatibleDimensions(ComponentType.TUBES, bike.getDimension(DimensionKey.TUBES__REAR_WHEEL_SIZE), ComponentType.FRAME, bike.getDimension(DimensionKey.FRAME__REAR_WHEEL_SIZE), null, null),
+            new CompatibleDimensions(ComponentType.TUBES, bike.getDimension(DimensionKey.TUBES__REAR_WHEEL_SIZE), ComponentType.REAR_TIRE, bike.getDimension(DimensionKey.REAR_TIRE__WHEEL_SIZE), null, null),
+            new CompatibleDimensions(ComponentType.TUBES, bike.getDimension(DimensionKey.TUBES__REAR_WHEEL_SIZE), ComponentType.REAR_WHEEL, bike.getDimension(DimensionKey.REAR_WHEEL__WHEEL_SIZE), null, null),
         ];
     }
 }
@@ -967,7 +971,7 @@ export class Bars extends BikeComponent {
     public override getCompatibleDimensions(bike: Bike): CompatibleDimensions[]
     {
         return [
-            new CompatibleDimensions(bike.getDimension(DimensionKey.BARS__CLAMP_DIAMETER), bike.getDimension(DimensionKey.STEM__CLAMP_DIAMETER), null, null),
+            new CompatibleDimensions(ComponentType.BARS, bike.getDimension(DimensionKey.BARS__CLAMP_DIAMETER), ComponentType.STEM, bike.getDimension(DimensionKey.STEM__CLAMP_DIAMETER), null, null),
         ];
     }
 }
@@ -981,9 +985,9 @@ export class Stem extends BikeComponent {
     public override getCompatibleDimensions(bike: Bike): CompatibleDimensions[]
     {
         return [
-            new CompatibleDimensions(bike.getDimension(DimensionKey.STEM__CLAMP_DIAMETER), bike.getDimension(DimensionKey.BARS__CLAMP_DIAMETER), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.STEM__STEERER_DIAMETER), bike.getDimension(DimensionKey.FORK__STEERER_TUBE_TOP_DIAMETER), null, null),
-            new CompatibleDimensions(bike.getDimension(DimensionKey.STEM__STEERER_DIAMETER), bike.getDimension(DimensionKey.HEADSET_TOP__STEERER_TUBE_DIAMETER), null, null),
+            new CompatibleDimensions(ComponentType.STEM, bike.getDimension(DimensionKey.STEM__CLAMP_DIAMETER), ComponentType.BARS, bike.getDimension(DimensionKey.BARS__CLAMP_DIAMETER), null, null),
+            new CompatibleDimensions(ComponentType.STEM, bike.getDimension(DimensionKey.STEM__STEERER_DIAMETER), ComponentType.FORK, bike.getDimension(DimensionKey.FORK__STEERER_TUBE_TOP_DIAMETER), null, null),
+            new CompatibleDimensions(ComponentType.STEM, bike.getDimension(DimensionKey.STEM__STEERER_DIAMETER), ComponentType.HEADSET_TOP, bike.getDimension(DimensionKey.HEADSET_TOP__STEERER_TUBE_DIAMETER), null, null),
         ];
     }
 }
@@ -1268,7 +1272,7 @@ ONE_HUNDRED_LEFTY = "100 Lefty",
 ONE_HUNDRED_QR = "100 QR",
 TWELVE_BY_HUNDRED = "12 X 100 TA",
 FIFTEEN_BY_ONE_HUNDRED = "15 X 100 TA",
-FIFTYEEN_BY_ONE_TEN_BOOST = "15 X 110 TA Boost",
+FIFTEEN_BY_ONE_TEN_BOOST = "15 X 110 TA Boost",
 FIFTEEN_BY_ONE_FIFTY = "15 X 150 TA",
 TWENTY_BY_ONE_FIFTY = "20 X 110 TA",
 OTHER = "Other - Specify in notes"

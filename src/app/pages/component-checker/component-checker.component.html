@@ -1,0 +1,73 @@
+<div class="component-checker abb-page">
+	<div class="title">
+		Alec's Component Checker
+	</div>
+	<div class="subtitle">
+		A common question I get from friends is which part they need to buy when upgrading or replacing a component.  Sometimes it's not as straightforward as just picking up a new tube.  This tool will help you know what to check for compatability when replacing or upgrading a component.
+	</div>
+
+	<div class="checker-contents">
+		<div class="component-selector column">
+			<div class="section-title">
+				Component Type
+			</div>
+			<div>
+				Select a component that you would like to replace.
+			</div>
+			<div>
+				<mat-form-field>
+					<mat-label>Selected Component</mat-label>
+					<mat-select [(value)]="selectedComponentType" (selectionChange)="selectedComponentChanged($event.value)">
+						<mat-option *ngFor="let componentType of componentTypes"
+							[value]="componentType">{{componentType}}</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</div>
+		</div>
+		<div class="compatability column">
+			<div class="section-title">
+				Component Dependencies
+			</div>
+			<div>
+				Fill out each of the dependant components to view the correct replacement dimensions.
+			</div>
+            <div class="component-types" *ngFor="let component of componentDependencyKeys">
+                {{component}}
+				<div class="component-specs" *ngFor="let dependencies of componentDependencyGroups.get(component)">
+					<div>
+						<mat-form-field>
+							<ng-container *ngIf="dependencies.matchDimension.type === 'ENUM'">
+									<mat-label>{{dependencies.matchDimension.label}}</mat-label>
+									<mat-select [(value)]="dependencies.matchDimension.value">
+										<mat-option [value]="materialOption" *ngFor="let materialOption of dependencies.matchDimension.keys; let i = index">{{dependencies.matchDimension.values[i]}}</mat-option>
+									</mat-select>
+							</ng-container>
+							<ng-container *ngIf="dependencies.matchDimension.type === 'NUMBER'">
+								<mat-label>{{dependencies.matchDimension.label}}</mat-label>
+								<input matInput type="number" placeholder="Ex. 190" [(ngModel)]="dependencies.matchDimension.value" [name]="dependencies.matchDimension.key">
+							</ng-container>
+							<ng-container *ngIf="dependencies.matchDimension.type === 'STRING'">
+								<mat-label>{{dependencies.matchDimension.label}}</mat-label>
+								<input matInput type="string" placeholder="Ex. 190" [(ngModel)]="dependencies.matchDimension.value" [name]="dependencies.matchDimension.key">
+							</ng-container>
+						</mat-form-field>
+					</div>
+				</div>
+            </div>
+		</div>
+		<div class="correct-dimensions column">
+			<div class="section-title">
+				Compatible Replacement
+			</div>
+			<div>
+				Once component dependencies are filled out, the correct replacement dimensions will be shown here.
+			</div>
+			<button (click)="generateValues()">Generate Component Specs</button>
+			<div>
+				<div *ngFor="let dimension of replacementDimensions">
+					{{dimension.currentDimension?.label}} : {{dimension.currentDimension?.value}}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

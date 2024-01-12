@@ -42,7 +42,9 @@ export class BikeBuilderComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getUser().subscribe((user) => {
-      this.userId = user.uid;
+		if (user) {
+			this.userId = user.uid;
+		}
     });
 
     const bikeId: string = history.state.bikeId;
