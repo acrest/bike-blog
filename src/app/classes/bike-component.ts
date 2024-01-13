@@ -145,6 +145,7 @@ export class BikeComponent {
     public durabilityScore: number;
     public warrantyInYears: number;
     public notes: string;
+    public tips: string[];
     public dimensions: Map<any, Dimension>;
     public compatibleDimensions: CompatibleDimensions[];
 
@@ -461,6 +462,9 @@ export class Fork extends BikeComponent {
     public constructor(userId: string, bikeId: string) {
         super(userId, bikeId, ComponentType.FORK);
         this.dimensions = ComponentDimensions.forkDimensions();
+		this.tips = [
+			"When purchasing a fork, if buying used make sure there is enough of the steer tube left for your current stack (stem, spacers, head tube, etc...)."
+		]
     }
 
     public override getCompatibleDimensions(bike: Bike): CompatibleDimensions[]
@@ -496,6 +500,7 @@ export class Fork extends BikeComponent {
 }
 
 export class Shock extends BikeComponent {
+	// Shock resource: https://canecreek.com/everything-you-need-to-know-about-rear-shocks/
     public constructor(userId: string, bikeId: string) {
         super(userId, bikeId, ComponentType.SHOCK);
         this.dimensions = ComponentDimensions.shockDimensions();
@@ -1298,9 +1303,9 @@ export enum DimensionType
 
 export enum DimensionUnits
 {
-    MILIMETER = " mm",
-    INCH = " in.",
-    CENTIMETER = " cm",
+    MILIMETER = "mm",
+    INCH = "in.",
+    CENTIMETER = "cm",
     DEGREES = "°",
     LBS = "lbs.",
     GRAMS = "gm",

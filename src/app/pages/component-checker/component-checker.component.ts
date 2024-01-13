@@ -66,11 +66,16 @@ export class ComponentCheckerComponent implements OnInit {
 				this.selectedComponent.dimensions.get(dimension.currentDimension.key).value = dimension.matchDimension.value
 				usedKeys.push(dimension.currentDimension.key)
 				dimension.currentDimension.value = dimension.matchDimension.value
+
 				this.replacementDimensions.push(dimension)
 			}
 		}
 	})
+
 	console.log("bike", this.bike)
+  }
+  public getEnumValue(enumKey: any, keys: any, values: any): any {
+	return values[keys.indexOf(enumKey)]
   }
 
 }

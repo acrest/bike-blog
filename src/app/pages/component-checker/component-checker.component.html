@@ -11,7 +11,7 @@
 			<div class="section-title">
 				Component Type
 			</div>
-			<div>
+			<div class="section-description">
 				Select a component that you would like to replace.
 			</div>
 			<div>
@@ -28,29 +28,31 @@
 			<div class="section-title">
 				Component Dependencies
 			</div>
-			<div>
+			<div class="section-description">
 				Fill out each of the dependant components to view the correct replacement dimensions.
 			</div>
             <div class="component-types" *ngFor="let component of componentDependencyKeys">
                 {{component}}
-				<div class="component-specs" *ngFor="let dependencies of componentDependencyGroups.get(component)">
-					<div>
-						<mat-form-field>
-							<ng-container *ngIf="dependencies.matchDimension.type === 'ENUM'">
-									<mat-label>{{dependencies.matchDimension.label}}</mat-label>
-									<mat-select [(value)]="dependencies.matchDimension.value">
-										<mat-option [value]="materialOption" *ngFor="let materialOption of dependencies.matchDimension.keys; let i = index">{{dependencies.matchDimension.values[i]}}</mat-option>
-									</mat-select>
-							</ng-container>
-							<ng-container *ngIf="dependencies.matchDimension.type === 'NUMBER'">
-								<mat-label>{{dependencies.matchDimension.label}}</mat-label>
-								<input matInput type="number" placeholder="Ex. 190" [(ngModel)]="dependencies.matchDimension.value" [name]="dependencies.matchDimension.key">
-							</ng-container>
-							<ng-container *ngIf="dependencies.matchDimension.type === 'STRING'">
-								<mat-label>{{dependencies.matchDimension.label}}</mat-label>
-								<input matInput type="string" placeholder="Ex. 190" [(ngModel)]="dependencies.matchDimension.value" [name]="dependencies.matchDimension.key">
-							</ng-container>
-						</mat-form-field>
+				<div class="component-specs">
+					<div class="component-spec" *ngFor="let dependencies of componentDependencyGroups.get(component)">
+						<div>
+							<mat-form-field>
+								<ng-container *ngIf="dependencies.matchDimension.type === 'ENUM'">
+										<mat-label>{{dependencies.matchDimension.label}} <span *ngIf="dependencies.matchDimension.unit">({{dependencies.matchDimension.unit}})</span></mat-label>
+										<mat-select [(value)]="dependencies.matchDimension.value">
+											<mat-option [value]="materialOption" *ngFor="let materialOption of dependencies.matchDimension.keys; let i = index">{{dependencies.matchDimension.values[i]}}</mat-option>
+										</mat-select>
+								</ng-container>
+								<ng-container *ngIf="dependencies.matchDimension.type === 'NUMBER'">
+									<mat-label>{{dependencies.matchDimension.label}} <span *ngIf="dependencies.matchDimension.unit">({{dependencies.matchDimension.unit}})</span></mat-label>
+									<input matInput type="number" placeholder="Ex. 190" [(ngModel)]="dependencies.matchDimension.value" [name]="dependencies.matchDimension.key">
+								</ng-container>
+								<ng-container *ngIf="dependencies.matchDimension.type === 'STRING'">
+									<mat-label>{{dependencies.matchDimension.label}} <span *ngIf="dependencies.matchDimension.unit">({{dependencies.matchDimension.unit}})</span></mat-label>
+									<input matInput type="string" placeholder="Ex. 190" [(ngModel)]="dependencies.matchDimension.value" [name]="dependencies.matchDimension.key">
+								</ng-container>
+							</mat-form-field>
+						</div>
 					</div>
 				</div>
             </div>
@@ -59,13 +61,31 @@
 			<div class="section-title">
 				Compatible Replacement
 			</div>
-			<div>
+			<div class="section-description">
 				Once component dependencies are filled out, the correct replacement dimensions will be shown here.
 			</div>
-			<button (click)="generateValues()">Generate Component Specs</button>
-			<div>
+			<button class="generate-button" (click)="generateValues()">Generate Component Specs</button>
+			<div *ngIf="selectedComponent?.tips" class="tips">
+				<div class="tips-title">
+					Tips for purchasing
+				</div>
+				<div class="tip" *ngFor="let tip of selectedComponent?.tips">
+					{{tip}}
+				</div>
+			</div>
+			<div *ngIf="replacementDimensions?.length > 0" class="generated-dimensions">
+				<div class="generated-dimensions-title">
+					Component Specs
+				</div>
 				<div *ngFor="let dimension of replacementDimensions">
-					{{dimension.currentDimension?.label}} : {{dimension.currentDimension?.value}}
+					<!-- {{dimension.currentDimension.type}} -->
+					<ng-container *ngIf="dimension.currentDimension.type === 'ENUM'">
+						{{dimension.currentDimension?.label}} : {{getEnumValue(dimension.currentDimension?.value, dimension.currentDimension.keys, dimension.currentDimension.values)}}{{dimension.currentDimension.unit}}
+					</ng-container>
+					<ng-container *ngIf="dimension.currentDimension.type !== 'ENUM'">
+						{{dimension.currentDimension?.label}} : {{dimension.currentDimension?.value}}{{dimension.currentDimension.unit}}
+					</ng-container>
+					<!-- {{dimension.currentDimension?.label}} : {{dimension.currentDimension?.value}} -->
 				</div>
 			</div>
 		</div>

@@ -12,6 +12,19 @@
 			font-size: 20px;
 			font-weight: 300;
 			margin-bottom: 10px;
+			text-align: center;
+		}
+		.section-description {
+			margin-bottom: 15px;
+			text-align: center;
+		}
+		.generate-button {
+			margin-bottom: 15px;
+		}
+		.generated-dimensions {
+			display: flex;
+			flex-direction: column;
+			gap: 5px;
 		}
 		.component-selector {
 
@@ -25,6 +38,11 @@
 				font-size: 18px;
 			}
 			.component-specs {
+				display: flex;
+				width: 400px;
+				flex-wrap: wrap;
+			}
+			.component-spec {
 				margin-left: 20px;
 				font-size: 15px;
 			}
@@ -32,6 +50,20 @@
 		}
 		.column {
 			max-width: 30%;
+		}
+		.tips {
+			margin-bottom: 15px;
+			display: flex;
+			flex-direction: column;
+			gap: 5px;
+		}
+		.tips-title {
+			margin-bottom: 8px;
+			font-size: 20px;
+		}
+		.generated-dimensions-title {
+			margin-bottom: 8px;
+			font-size: 20px;
 		}
 	}
 }
