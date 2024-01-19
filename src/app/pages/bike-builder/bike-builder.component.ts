@@ -45,6 +45,7 @@ export class BikeBuilderComponent implements OnInit {
 		if (user) {
 			this.userId = user.uid;
 		}
+		this.startBikeBuilding()
     });
 
     const bikeId: string = history.state.bikeId;

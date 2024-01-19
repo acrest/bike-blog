@@ -1,4 +1,10 @@
-<div class="deal-main">
+<div class="deal-main abb-page">
+	<div class="title">
+		Deals
+	</div>
+	<div class="subtitle">
+		When I see a deal I like, I post it here and share it with everyone.
+	</div>
 	<div class="deal" *ngFor="let deal of deals; let i=index">
 		<img *ngIf="deal.imageUrl" src="{{deal.imageUrl}}">
 		<div class="content">

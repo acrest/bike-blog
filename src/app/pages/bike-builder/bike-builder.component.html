@@ -1,4 +1,10 @@
-<div class="bike-builder-page">
+<div class="bike-builder-page abb-page">
+	<div class="title">
+		Bike Builder
+	</div>
+	<div class="subtitle">
+		All you need to know to buy the right parts to build a bike from scratch!  To learn how to assemble, check out the tutorials.
+	</div>
     <div *ngIf="!bike && !loading" class="bike-start">
         <div>
             <div>What type of frame will you build from?</div>
@@ -16,18 +22,19 @@
                   </mat-radio-button>
               </mat-radio-group>
         </div>
-        <button mat-flat-button [disabled]="!suspension || !drivetrain" (click)="startBikeBuilding()">Continue</button>
+        <button class="continue-button" mat-flat-button [disabled]="!suspension || !drivetrain" (click)="startBikeBuilding()">Continue</button>
     </div>
 
     <div *ngIf="bike" class="bike-options">
         <!-- <button *ngIf="userId" (click)="saveCurrentBike()">Save Bike</button> -->
-        <button (click)="clearCurrentBike()">Clear Bike</button>
+        
         <!-- Name:
         <input type="text" placeholder="Ex. Ripmo" [(ngModel)]="bike.name" name="bikeName">
         <button (click)="uploadPhoto()">Upload Bike Photo</button> -->
     </div>
     <div *ngIf="bike" class="component-list-and-pic">
         <div class="components">
+			<button (click)="clearCurrentBike()">Clear Bike</button>
             <div class="component-button" [ngClass]="{'selected': component.value === selectedComponent}" *ngFor="let component of bike.components | keyvalue" >
                 <span *ngIf="component.value.getIsCompatible(bike) === 'COMPATIBLE'" class="dot green"></span>
                 <span *ngIf="component.value.getIsCompatible(bike) === 'NOT_COMPATIBLE'" class="dot red"></span>
@@ -81,7 +88,7 @@
                     <input matInput type="text" placeholder="Ex. 190" [(ngModel)]="selectedComponent.model" name="model">
                 </mat-form-field>
             </ng-container>
-            <mat-form-field class="example-full-width">
+            <mat-form-field class="example-full-width notes">
                 <mat-label>Notes</mat-label>
                 <textarea matInput placeholder="Ex. 190" [(ngModel)]="selectedComponent.notes" name="notes"></textarea>
             </mat-form-field>
@@ -89,7 +96,7 @@
 
         <div class="dimensions">
             <app-dimensions *ngIf="selectedComponent.type !== 'Other'" [component]='selectedComponent'></app-dimensions>
-            <div *ngIf="selectedComponent.type === 'Other'">
+            <div class="other-dimensions" *ngIf="selectedComponent.type === 'Other'">
                 <div *ngFor="let otherComponent of selectedOtherComponent.items; let i = index">
                     <button (click)="selectedOtherComponent.removeItemFromArray(i)">Remove Item</button>
                     <mat-form-field class="example-full-width">
@@ -112,7 +119,7 @@
                         <mat-label>Model</mat-label>
                         <input disabled matInput type="text" placeholder="Ex. 190" [(ngModel)]="otherComponent.model" name="otherModel">
                     </mat-form-field>
-                    <mat-form-field class="example-full-width">
+                    <mat-form-field class="example-full-width notes">
                         <mat-label>Notes</mat-label>
                         <textarea matInput placeholder="Ex. 190"  [(ngModel)]="otherComponent.additionalNotes" name="otherNotes"></textarea>
                     </mat-form-field>

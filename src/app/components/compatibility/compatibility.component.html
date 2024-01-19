@@ -6,7 +6,7 @@
         <div *ngIf="compatibleDimensions.length > 0">
             Compatibility with other components
             <div class="descriptions" *ngFor="let dimensions of compatibleDimensions">
-                <button (click)="goToComponent(dimensions)">Go</button>
+                <button class="go-button" (click)="goToComponent(dimensions)">Go</button>
                 <span *ngIf="dimensions.getStatus() === 'COMPATIBLE'" class="dot green"></span>
                 <span *ngIf="dimensions.getStatus() === 'NOT_COMPATIBLE'" class="dot red"></span>
                 <span *ngIf="dimensions.getStatus() === 'MISSING_CURRENT_DIMENSION'" class="dot yellow"></span>

@@ -2,10 +2,13 @@
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
+	width: 100%;
+	text-align: center;
 	.deal {
 		cursor: pointer;
 		display: flex;
 		width: 500px;
+		margin: auto;
 		img {
 			max-height: 100px;
 			margin-right: 20px;

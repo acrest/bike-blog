@@ -1,7 +1,10 @@
 .blog-main {
 	display: flex;
+	margin: auto;
 	text-align: center;
 	gap: 10px;
+	width: 100%;
+	justify-content: space-around;
 	.posts {
 		display: flex;
 		gap: 10px;

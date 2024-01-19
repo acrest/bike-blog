@@ -16,9 +16,11 @@
 			margin-left: 20px;
 		}
 	}
-	.main-content {
-		flex-grow: 1;
+	.outlet {
 		justify-content: center;
+		margin-left: 10px;
+		margin-right: 10px;
+		width: calc(100% - 20px);
 	}
 }
 

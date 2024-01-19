@@ -1,13 +1,21 @@
 .bike-builder-page{
     margin: 10px;
     .bike-start{
-
+		.example-radio-button {
+			margin: 5px;
+		}
+		.continue-button {
+			background-color: lightgrey;
+			margin-top: 10px;
+		}
     }
     .component-list-and-pic {
         max-height: 500px;
         display: flex;
         justify-content: space-evenly;
-        width: 100%;
+		width: calc(100% - 50px);
+		gap: 10px;
+		margin: auto;
         .components{
             min-width: 190px;
             max-width: 190px;
@@ -17,9 +25,7 @@
             
             .component-button {
                 background-color: rgb(241, 241, 241);
-                margin-left: 10px;
                 margin-top: 5px;
-                margin-right: 10px;
                 border: darkgray;
                 display: flex;
 
@@ -40,6 +46,8 @@
                     border-width: 2px;
                     display: inline-block;
                     margin: auto;
+					margin-left: 5px;
+					margin-right: 5px;
                     &.green {
                         background-color: green;
                     }
@@ -53,6 +61,8 @@
             }
         }
         .bike-info{
+			max-width: 450px;
+			max-height: 450px;
             #bike-photo {
                 max-width: 450px;
                 max-height: 450px;
@@ -70,13 +80,34 @@
             }
         }
         .compatibliity-list {
-            flex-grow: 1;
+            min-width: calc(100% - 660px);
+            max-width: calc(100% - 660px);
             max-height: 500px;
             overflow-y: scroll;
             background-color: rgb(241, 241, 241);
         }
     }
     .bike-component-info {
-        margin-top: 20px;
+		width: calc(100% - 50px);
+		margin: auto;
+		margin-top: 20px;
+		mat-form-field {
+			margin-right: 10px;
+		}
+		.notes {
+			width: 100%;
+		}
+		.component-form {
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+			flex-wrap: wrap;
+		}
+		.other-dimensions {
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+			flex-wrap: wrap;
+		}
     }
 }
